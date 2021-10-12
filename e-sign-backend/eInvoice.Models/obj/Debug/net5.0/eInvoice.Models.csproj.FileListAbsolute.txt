@@ -1,0 +1,15 @@
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\bin\Debug\net5.0\eInvoice.Models.deps.json
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\bin\Debug\net5.0\eInvoice.Models.runtimeconfig.json
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\bin\Debug\net5.0\eInvoice.Models.runtimeconfig.dev.json
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\bin\Debug\net5.0\eInvoice.Models.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\bin\Debug\net5.0\ref\eInvoice.Models.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\bin\Debug\net5.0\eInvoice.Models.pdb
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\eInvoice.Models.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\eInvoice.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\eInvoice.Models.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\eInvoice.Models.AssemblyInfo.cs
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\eInvoice.Models.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\eInvoice.Models.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\ref\eInvoice.Models.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\eInvoice.Models.pdb
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Models\obj\Debug\net5.0\eInvoice.Models.genruntimeconfig.cache

@@ -1,0 +1,15 @@
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\bin\Debug\net5.0\eInvoice.Services.deps.json
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\bin\Debug\net5.0\eInvoice.Services.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\bin\Debug\net5.0\ref\eInvoice.Services.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\bin\Debug\net5.0\eInvoice.Services.pdb
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\eInvoice.Services.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\eInvoice.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\eInvoice.Services.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\eInvoice.Services.AssemblyInfo.cs
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\eInvoice.Services.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\eInvoice.Services.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\ref\eInvoice.Services.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\eInvoice.Services.pdb
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\bin\Debug\net5.0\eInvoice.Models.dll
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\bin\Debug\net5.0\eInvoice.Models.pdb
+C:\Users\Admin\source\repos\eInvoice\eInvoice.Services\obj\Debug\net5.0\eInvoice.Services.csproj.CopyComplete
