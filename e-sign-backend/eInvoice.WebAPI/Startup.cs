@@ -1,5 +1,6 @@
 using eInvoice.Models.AppSettings;
 using eInvoice.Models.Models.DbContext;
+using eInvoice.Services.Clients;
 using eInvoice.Services.Repositories;
 using eInvoice.Services.Services;
 using eInvoice.WebAPI.Middlewares;
@@ -34,6 +35,7 @@ namespace eInvoice.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Jwt>(Configuration.GetSection("Jwt"));
+            services.Configure<Apis>(Configuration.GetSection("Apis"));
 
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddCors(options =>
@@ -54,6 +56,8 @@ namespace eInvoice.WebAPI
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITaxAuthorityService, TaxAuthorityServices>();
+            services.AddHttpClient<BaseHttpClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

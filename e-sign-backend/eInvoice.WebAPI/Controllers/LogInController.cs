@@ -15,11 +15,13 @@ namespace eInvoice.WebAPI.Controllers
     {
         private readonly ILogger<LogInController> logger;
         private readonly IUserService userService;
+        private readonly ITaxAuthorityService taxAuthorityService;
 
-        public LogInController(IUserService userService, ILogger<LogInController> logger)
+        public LogInController(IUserService userService, ILogger<LogInController> logger, ITaxAuthorityService taxAuthorityService)
         {
             this.userService = userService;
             this.logger = logger;
+            this.taxAuthorityService = taxAuthorityService;
         }
 
         [HttpPost("login")]
@@ -64,6 +66,21 @@ namespace eInvoice.WebAPI.Controllers
         {
             var users = userService.GetAll();
             return Ok(users);
+        }
+
+        
+        [HttpGet("Tax/Token")]
+        public IActionResult GetToken()
+        {
+            try
+            {
+                var users = taxAuthorityService.GetToken();
+                return Ok(users);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
