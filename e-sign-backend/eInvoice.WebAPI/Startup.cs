@@ -54,10 +54,11 @@ namespace eInvoice.WebAPI
 
             services.AddDbContext<eInvoiceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
 
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITaxAuthorityService, TaxAuthorityServices>();
-            services.AddHttpClient<BaseHttpClient>();
+            services.AddScoped<IDocumentsService, DocumentsService>();
+            services.AddHttpClient<IdentityServiceHttpClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

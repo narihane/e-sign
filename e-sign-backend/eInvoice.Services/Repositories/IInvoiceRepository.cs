@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace eInvoice.Services.Repositories
 {
-    public interface IUserRepository
+    public interface IInvoiceRepository
     {
-        User GetUser(string username, string password);
+        Invoice Getinvoice(string internalId)
     }
 }

@@ -209,6 +209,11 @@ namespace eInvoice.Models.Models.DbContext
                     .IsUnicode(false)
                     .HasColumnName("purchaseOrderDescription");
 
+                entity.Property(e => e.TaxpayerActivityCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("taxpayerActivityCode");
+
                 entity.Property(e => e.PurchaseOrderReference)
                     .HasMaxLength(255)
                     .IsUnicode(false)

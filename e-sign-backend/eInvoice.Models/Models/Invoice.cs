@@ -22,6 +22,7 @@ namespace eInvoice.Models.Models
         public DateTime DateIssued { get; set; }
         public string PurchaseOrderReference { get; set; }
         public string PurchaseOrderDescription { get; set; }
+        public string TaxpayerActivityCode { get; set; }
         public string SalesOrderReference { get; set; }
         public string SalesOrderDescription { get; set; }
         public string ProformaInvoiceNumber { get; set; }

@@ -18,12 +18,14 @@ namespace eInvoice.Services.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepo;
+        private readonly IGenericRepository<User> genericRepo;
         private readonly Jwt jwtSettings;
 
-        public UserService(IUserRepository userRepo, IOptions<Jwt> jwtSettings)
+        public UserService(IUserRepository userRepo, IGenericRepository<User> genericRepo, IOptions<Jwt> jwtSettings)
         {
             this.userRepo = userRepo;
             this.jwtSettings = jwtSettings.Value;
+            this.genericRepo = genericRepo;
         }
 
         public AuthResponseModel LogIn(AuthRequestModel model)
@@ -68,17 +70,17 @@ namespace eInvoice.Services.Services
                 }
             };
 
-            userRepo.Insert(userObject);
+            genericRepo.Insert(userObject);
         }
 
         public IEnumerable<User> GetAll()
         {
-            return userRepo.GetAll();
+            return genericRepo.GetAll();
         }
 
         public User GetById(int id)
         {
-            return userRepo.GetById(id);
+            return genericRepo.GetById(id);
         }
 
         private string generateJwtToken(User user)

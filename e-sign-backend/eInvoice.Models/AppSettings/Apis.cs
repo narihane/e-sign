@@ -8,7 +8,9 @@ namespace eInvoice.Models.AppSettings
 {
     public class Apis
     {
-        public string BaseAddress { get; set; }
+        public string IdentityService { get; set; }
+        public string SystemApi { get; set; }
+        public string InvoicingApi { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
     }

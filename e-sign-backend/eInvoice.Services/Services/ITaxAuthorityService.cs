@@ -1,4 +1,6 @@
-﻿using System;
+﻿using eInvoice.Models.DTOModel;
+using eInvoice.Models.DTOModel.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,6 @@ namespace eInvoice.Services.Services
 {
     public interface ITaxAuthorityService
     {
-        Task GetToken();
+        Task<GetTokenResponse> GetToken();
     }
 }

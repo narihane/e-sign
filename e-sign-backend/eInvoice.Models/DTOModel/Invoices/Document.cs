@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace eInvoice.Models.DTOModel.Invoices
 {
-    public class Invoice
+    public class Document
     {
         public Issuer issuer { get; set; }
         public Receiver receiver { get; set; }
         public DocumentType documentType { get; set; }
+        public string documentTypeVersion { get; set; }
         public DateTime dateTimeIssued { get; set; }
         public string taxpayerActivityCode { get; set; }
         public string internalId { get; set; }
@@ -22,8 +23,8 @@ namespace eInvoice.Models.DTOModel.Invoices
         
         // Max 50 chars
         public string proformaInvoiceNumber { get; set; }
-        public Payment? payment { get; set; }
-        public Delivery? delivery { get; set; }
+        public Payment payment { get; set; }
+        public Delivery delivery { get; set; }
         public List<InvoiceLine> invoiceLines { get; set; }
         public decimal totalSalesAmount { get; set; }
         public decimal totalDiscountAmount { get; set; }

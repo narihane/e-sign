@@ -8,19 +8,18 @@ using System.Threading.Tasks;
 
 namespace eInvoice.Services.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class InvoiceRepository : IInvoiceRepository
     {
         private readonly eInvoiceContext dbcontext;
-
-        public UserRepository(eInvoiceContext dbcontext)
+        
+        public InvoiceRepository(eInvoiceContext dbcontext)
         {
             this.dbcontext = dbcontext;
         }
 
-        public User GetUser(string username, string password)
+        public Invoice Getinvoice(string internalId)
         {
-            return dbcontext.Set<User>().Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+            return dbcontext.Set<Invoice>().Where(x => x.InteranlId == internalId).FirstOrDefault();
         }
-
     }
 }

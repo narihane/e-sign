@@ -2,7 +2,7 @@
 using eInvoice.Services.Services;
 using eInvoice.WebAPI.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +13,11 @@ namespace eInvoice.WebAPI.Controllers
     [ApiController]
     public class LogInController : ControllerBase
     {
-        private readonly ILogger<LogInController> logger;
+        private readonly ILogger logger;
         private readonly IUserService userService;
         private readonly ITaxAuthorityService taxAuthorityService;
 
-        public LogInController(IUserService userService, ILogger<LogInController> logger, ITaxAuthorityService taxAuthorityService)
+        public LogInController(IUserService userService, ILogger logger, ITaxAuthorityService taxAuthorityService)
         {
             this.userService = userService;
             this.logger = logger;
@@ -38,7 +38,7 @@ namespace eInvoice.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogInformation(ex.Message);
+                logger.Error(ex, ex.Message);
                 return Unauthorized();
             }
 
@@ -69,13 +69,13 @@ namespace eInvoice.WebAPI.Controllers
         }
 
         
-        [HttpGet("Tax/Token")]
-        public IActionResult GetToken()
+        [HttpGet("TaxPayer/Login")]
+        public async Task<IActionResult> GetToken()
         {
             try
             {
-                var users = taxAuthorityService.GetToken();
-                return Ok(users);
+                var response = await taxAuthorityService.GetToken();
+                return Ok(response);
             }
             catch(Exception ex)
             {

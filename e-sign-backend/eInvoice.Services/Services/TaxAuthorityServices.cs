@@ -1,4 +1,5 @@
-﻿using eInvoice.Services.Clients;
+﻿using eInvoice.Models.DTOModel;
+using eInvoice.Services.Clients;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,17 @@ namespace eInvoice.Services.Services
 {
     public class TaxAuthorityServices : ITaxAuthorityService
     {
-        private readonly BaseHttpClient httpClient;
+        private readonly IdentityServiceHttpClient httpClient;
 
-        public TaxAuthorityServices(BaseHttpClient httpClient)
+        public TaxAuthorityServices(IdentityServiceHttpClient httpClient)
         {
             this.httpClient = httpClient;
         }
 
-        public async Task GetToken()
+        public async Task<GetTokenResponse> GetToken()
         {
-            await httpClient.GetToken();
+            var tokenResponse = await httpClient.GetToken();
+            return tokenResponse;
         }
     }
 }
