@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~animate.css/animate.min';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.gradArcher {
+  background-image: linear-gradient(to right, rgb(3, 4, 83) , rgb(26, 201, 224));
+}
+
+.gradIdentity {
+  background-image: linear-gradient(to right,rgb(100, 20, 0) ,rgb(202, 40, 0));
+}

@@ -1,0 +1,7 @@
+.gradArcher {
+  background-image: linear-gradient(to right, rgb(3, 4, 83) , rgb(26, 201, 224));
+}
+
+.gradIdentity {
+  background-image: linear-gradient(to right,rgb(100, 20, 0) ,rgb(202, 40, 0));
+}

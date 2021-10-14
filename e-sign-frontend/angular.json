@@ -6,9 +6,7 @@
     "e-sign-frontend": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:application": {
-          "strict": true
-        }
+
       },
       "root": "",
       "sourceRoot": "src",
@@ -27,9 +25,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./src/styles.css",
+              "./src/assets/scss/argon.scss",
+              "./node_modules/animate.css/animate.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -94,7 +97,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./src/styles.scss",
+              "./src/assets/scss/argon.scss",
+              "./node_modules/animate.css/animate.min.css"
             ],
             "scripts": []
           }
@@ -102,5 +109,10 @@
       }
     }
   },
-  "defaultProject": "e-sign-frontend"
+  "defaultProject": "e-sign-frontend",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
