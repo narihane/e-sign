@@ -1,4 +1,5 @@
 ﻿using eInvoice.Models.DTOModel;
+using eInvoice.Models.DTOModel.Responses;
 using eInvoice.Services.Clients;
 using System;
 using System.Collections.Generic;

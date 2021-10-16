@@ -55,7 +55,7 @@ namespace eInvoice.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogInformation(ex.Message);
+                logger.Error(ex, ex.Message);
                 return Unauthorized();
             }
         }
@@ -64,11 +64,20 @@ namespace eInvoice.WebAPI.Controllers
         [HttpGet("Users")]
         public IActionResult GetAll()
         {
-            var users = userService.GetAll();
-            return Ok(users);
+            try
+            {
+                var users = userService.GetAll();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                return BadRequest();
+            }
+            
         }
 
-        
+
         [HttpGet("TaxPayer/Login")]
         public async Task<IActionResult> GetToken()
         {
@@ -77,7 +86,7 @@ namespace eInvoice.WebAPI.Controllers
                 var response = await taxAuthorityService.GetToken();
                 return Ok(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

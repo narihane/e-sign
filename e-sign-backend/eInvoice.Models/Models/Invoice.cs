@@ -16,13 +16,13 @@ namespace eInvoice.Models.Models
         }
 
         public string InteranlId { get; set; }
-        public int CompanyId { get; set; }
+        public int IssuerId { get; set; }
+        public int ReceiverId { get; set; }
         public string DocumentType { get; set; }
         public string DocumentTypeversion { get; set; }
         public DateTime DateIssued { get; set; }
         public string PurchaseOrderReference { get; set; }
         public string PurchaseOrderDescription { get; set; }
-        public string TaxpayerActivityCode { get; set; }
         public string SalesOrderReference { get; set; }
         public string SalesOrderDescription { get; set; }
         public string ProformaInvoiceNumber { get; set; }
@@ -34,10 +34,12 @@ namespace eInvoice.Models.Models
         public decimal ExtraDiscountAmount { get; set; }
         public decimal TotalItemsDiscountAmount { get; set; }
         public decimal TotalAmount { get; set; }
+        public string TaxpayerActivityCode { get; set; }
 
-        public virtual Company Company { get; set; }
         public virtual Delivery Delivery { get; set; }
+        public virtual Issuer Issuer { get; set; }
         public virtual Payment Payment { get; set; }
+        public virtual Receiver Receiver { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Signature> Signatures { get; set; }
         public virtual ICollection<SubmittedDoc> SubmittedDocs { get; set; }

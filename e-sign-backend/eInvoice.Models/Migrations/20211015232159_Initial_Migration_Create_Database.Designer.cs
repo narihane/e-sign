@@ -10,8 +10,8 @@ using eInvoice.Models.Models.DbContext;
 namespace eInvoice.Models.Migrations
 {
     [DbContext(typeof(eInvoiceContext))]
-    [Migration("20211012213847_createDatabase")]
-    partial class createDatabase
+    [Migration("20211015232159_Initial_Migration_Create_Database")]
+    partial class Initial_Migration_Create_Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,175 @@ namespace eInvoice.Models.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("eInvoice.Models.Models.Company", b =>
+            modelBuilder.Entity("eInvoice.Models.Models.Delivery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Approach")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("approach");
+
+                    b.Property<string>("CountryOfOrigin")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("countryOfOrigin");
+
+                    b.Property<string>("DateValidity")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("dateValidity");
+
+                    b.Property<string>("ExportPort")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("exportPort");
+
+                    b.Property<decimal?>("GrossWeight")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("grossWeight");
+
+                    b.Property<decimal?>("NetWeight")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("netWeight");
+
+                    b.Property<string>("Packaging")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("packaging");
+
+                    b.Property<string>("Terms")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("terms");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Delivery", "business");
+                });
+
+            modelBuilder.Entity("eInvoice.Models.Models.Invoice", b =>
+                {
+                    b.Property<string>("InteranlId")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("interanlId");
+
+                    b.Property<DateTime>("DateIssued")
+                        .HasColumnType("date")
+                        .HasColumnName("dateIssued");
+
+                    b.Property<int?>("DeliveryId")
+                        .HasColumnType("int")
+                        .HasColumnName("deliveryId");
+
+                    b.Property<string>("DocumentType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("documentType");
+
+                    b.Property<string>("DocumentTypeversion")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("documentTypeversion");
+
+                    b.Property<decimal>("ExtraDiscountAmount")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("extraDiscountAmount");
+
+                    b.Property<int>("IssuerId")
+                        .HasColumnType("int")
+                        .HasColumnName("issuerId");
+
+                    b.Property<decimal>("NetAmount")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("netAmount");
+
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int")
+                        .HasColumnName("paymentId");
+
+                    b.Property<string>("ProformaInvoiceNumber")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("proformaInvoiceNumber");
+
+                    b.Property<string>("PurchaseOrderDescription")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("purchaseOrderDescription");
+
+                    b.Property<string>("PurchaseOrderReference")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("purchaseOrderReference");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int")
+                        .HasColumnName("receiverId");
+
+                    b.Property<string>("SalesOrderDescription")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("salesOrderDescription");
+
+                    b.Property<string>("SalesOrderReference")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("salesOrderReference");
+
+                    b.Property<string>("TaxpayerActivityCode")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("taxpayerActivityCode");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("totalAmount");
+
+                    b.Property<decimal>("TotalDiscountAmount")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("totalDiscountAmount");
+
+                    b.Property<decimal>("TotalItemsDiscountAmount")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("totalItemsDiscountAmount");
+
+                    b.Property<decimal>("TotalSalesAmount")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("totalSalesAmount");
+
+                    b.HasKey("InteranlId")
+                        .HasName("PK__Invoice__1B0114ED4BCD0616");
+
+                    b.HasIndex("DeliveryId");
+
+                    b.HasIndex("IssuerId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("Invoice", "taxes");
+                });
+
+            modelBuilder.Entity("eInvoice.Models.Models.Issuer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,6 +251,10 @@ namespace eInvoice.Models.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("postalCode");
 
+                    b.Property<decimal?>("PriceThreshold")
+                        .HasColumnType("decimal(10,5)")
+                        .HasColumnName("priceThreshold");
+
                     b.Property<string>("RegionCity")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -110,162 +282,7 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("company", "business");
-                });
-
-            modelBuilder.Entity("eInvoice.Models.Models.Delivery", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Approach")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("approach");
-
-                    b.Property<string>("CountryOfOrigin")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("countryOfOrigin");
-
-                    b.Property<string>("DateValidity")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("dateValidity");
-
-                    b.Property<string>("ExportPort")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("exportPort");
-
-                    b.Property<decimal?>("GrossWeight")
-                        .HasColumnType("decimal(10,5)")
-                        .HasColumnName("grossWeight");
-
-                    b.Property<decimal?>("NetWeight")
-                        .HasColumnType("decimal(10,5)")
-                        .HasColumnName("netWeight");
-
-                    b.Property<string>("Packaging")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("packaging");
-
-                    b.Property<string>("Terms")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("terms");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("delivery", "business");
-                });
-
-            modelBuilder.Entity("eInvoice.Models.Models.Invoice", b =>
-                {
-                    b.Property<string>("InteranlId")
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("interanlId");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int")
-                        .HasColumnName("companyId");
-
-                    b.Property<DateTime>("DateIssued")
-                        .HasColumnType("date")
-                        .HasColumnName("dateIssued");
-
-                    b.Property<int?>("DeliveryId")
-                        .HasColumnType("int")
-                        .HasColumnName("deliveryId");
-
-                    b.Property<string>("DocumentType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("documentType");
-
-                    b.Property<string>("DocumentTypeversion")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("documentTypeversion");
-
-                    b.Property<decimal>("ExtraDiscountAmount")
-                        .HasColumnType("decimal(10,5)")
-                        .HasColumnName("extraDiscountAmount");
-
-                    b.Property<decimal>("NetAmount")
-                        .HasColumnType("decimal(10,5)")
-                        .HasColumnName("netAmount");
-
-                    b.Property<int?>("PaymentId")
-                        .HasColumnType("int")
-                        .HasColumnName("paymentId");
-
-                    b.Property<string>("ProformaInvoiceNumber")
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("proformaInvoiceNumber");
-
-                    b.Property<string>("PurchaseOrderDescription")
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("purchaseOrderDescription");
-
-                    b.Property<string>("PurchaseOrderReference")
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("purchaseOrderReference");
-
-                    b.Property<string>("SalesOrderDescription")
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("salesOrderDescription");
-
-                    b.Property<string>("SalesOrderReference")
-                        .HasMaxLength(255)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("salesOrderReference");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(10,5)")
-                        .HasColumnName("totalAmount");
-
-                    b.Property<decimal>("TotalDiscountAmount")
-                        .HasColumnType("decimal(10,5)")
-                        .HasColumnName("totalDiscountAmount");
-
-                    b.Property<decimal>("TotalItemsDiscountAmount")
-                        .HasColumnType("decimal(10,5)")
-                        .HasColumnName("totalItemsDiscountAmount");
-
-                    b.Property<decimal>("TotalSalesAmount")
-                        .HasColumnType("decimal(10,5)")
-                        .HasColumnName("totalSalesAmount");
-
-                    b.HasKey("InteranlId")
-                        .HasName("PK__invoice__1B0114ED32D54757");
-
-                    b.HasIndex(new[] { "CompanyId" }, "IX_invoice_companyId");
-
-                    b.HasIndex(new[] { "DeliveryId" }, "IX_invoice_deliveryId");
-
-                    b.HasIndex(new[] { "PaymentId" }, "IX_invoice_paymentId");
-
-                    b.ToTable("invoice", "taxes");
+                    b.ToTable("Issuer", "business");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.Payment", b =>
@@ -308,7 +325,7 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("payments", "business");
+                    b.ToTable("Payments", "business");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.Product", b =>
@@ -415,9 +432,100 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Productid");
 
-                    b.HasIndex(new[] { "InvoiceInternalId" }, "IX_products_invoiceInternalId");
+                    b.HasIndex("InvoiceInternalId");
 
-                    b.ToTable("products", "business");
+                    b.ToTable("Products", "business");
+                });
+
+            modelBuilder.Entity("eInvoice.Models.Models.Receiver", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AdditionalInformation")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("additionalInformation");
+
+                    b.Property<string>("BranchId")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("branchId");
+
+                    b.Property<string>("BuildingNumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("buildingNumber");
+
+                    b.Property<string>("Country")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("country");
+
+                    b.Property<string>("FlatNumber")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("flatNumber");
+
+                    b.Property<string>("Floor")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("floor");
+
+                    b.Property<string>("Governate")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("governate");
+
+                    b.Property<string>("Landmark")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("landmark");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("PostalCode")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("postalCode");
+
+                    b.Property<string>("RegionCity")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("regionCity");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("registrationNumber");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("street");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Receiver", "business");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.Signature", b =>
@@ -450,9 +558,9 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "InvoiceInternalId" }, "IX_signatures_invoiceInternalId");
+                    b.HasIndex("InvoiceInternalId");
 
-                    b.ToTable("signatures", "business");
+                    b.ToTable("Signatures", "business");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.SubmittedDoc", b =>
@@ -483,9 +591,9 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "InvoiceInternalId" }, "IX_submittedDocs_invoiceInternalId");
+                    b.HasIndex("InvoiceInternalId");
 
-                    b.ToTable("submittedDocs", "business");
+                    b.ToTable("SubmittedDocs", "business");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.TaxType", b =>
@@ -525,9 +633,9 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "InvoiceInternalId" }, "IX_taxTypes_invoiceInternalId");
+                    b.HasIndex("InvoiceInternalId");
 
-                    b.ToTable("taxTypes", "taxes");
+                    b.ToTable("TaxTypes", "taxes");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.User", b =>
@@ -561,7 +669,7 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users", "business");
+                    b.ToTable("Users", "business");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.Usersdetail", b =>
@@ -634,37 +742,46 @@ namespace eInvoice.Models.Migrations
                         .HasColumnName("street");
 
                     b.HasKey("Userid")
-                        .HasName("PK__usersdet__CBA1B257BAC2A7B9");
+                        .HasName("PK__Usersdet__CBA1B2570CDC5B00");
 
-                    b.ToTable("usersdetails", "business");
+                    b.ToTable("Usersdetails", "business");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.Invoice", b =>
                 {
-                    b.HasOne("eInvoice.Models.Models.Company", "Company")
-                        .WithMany("Invoices")
-                        .HasForeignKey("CompanyId")
-                        .HasConstraintName("FK__invoice__company__2A4B4B5E")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("eInvoice.Models.Models.Delivery", "Delivery")
                         .WithMany("Invoices")
                         .HasForeignKey("DeliveryId")
-                        .HasConstraintName("FK__invoice__deliver__2C3393D0")
+                        .HasConstraintName("FK__Invoice__deliver__5DCAEF64")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("eInvoice.Models.Models.Issuer", "Issuer")
+                        .WithMany("Invoices")
+                        .HasForeignKey("IssuerId")
+                        .HasConstraintName("FK__Invoice__issuerI__5AEE82B9")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("eInvoice.Models.Models.Payment", "Payment")
                         .WithMany("Invoices")
                         .HasForeignKey("PaymentId")
-                        .HasConstraintName("FK__invoice__payment__2B3F6F97")
+                        .HasConstraintName("FK__Invoice__payment__5CD6CB2B")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Company");
+                    b.HasOne("eInvoice.Models.Models.Receiver", "Receiver")
+                        .WithMany("Invoices")
+                        .HasForeignKey("ReceiverId")
+                        .HasConstraintName("FK__Invoice__receive__5BE2A6F2")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Delivery");
 
+                    b.Navigation("Issuer");
+
                     b.Navigation("Payment");
+
+                    b.Navigation("Receiver");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.Product", b =>
@@ -672,7 +789,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Invoice", "InvoiceInternal")
                         .WithMany("Products")
                         .HasForeignKey("InvoiceInternalId")
-                        .HasConstraintName("FK__products__invoic__31EC6D26")
+                        .HasConstraintName("FK__Products__invoic__6383C8BA")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -684,7 +801,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Invoice", "InvoiceInternal")
                         .WithMany("Signatures")
                         .HasForeignKey("InvoiceInternalId")
-                        .HasConstraintName("FK__signature__invoi__34C8D9D1")
+                        .HasConstraintName("FK__Signature__invoi__66603565")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -696,7 +813,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Invoice", "InvoiceInternal")
                         .WithMany("SubmittedDocs")
                         .HasForeignKey("InvoiceInternalId")
-                        .HasConstraintName("FK__submitted__invoi__2F10007B")
+                        .HasConstraintName("FK__Submitted__invoi__60A75C0F")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -708,7 +825,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Invoice", "InvoiceInternal")
                         .WithMany("TaxTypes")
                         .HasForeignKey("InvoiceInternalId")
-                        .HasConstraintName("FK__taxTypes__invoic__37A5467C")
+                        .HasConstraintName("FK__TaxTypes__invoic__693CA210")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -720,16 +837,11 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.User", "User")
                         .WithOne("Usersdetail")
                         .HasForeignKey("eInvoice.Models.Models.Usersdetail", "Userid")
-                        .HasConstraintName("FK__usersdeta__fullA__5070F446")
+                        .HasConstraintName("FK__Usersdeta__fullA__6E01572D")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("eInvoice.Models.Models.Company", b =>
-                {
-                    b.Navigation("Invoices");
                 });
 
             modelBuilder.Entity("eInvoice.Models.Models.Delivery", b =>
@@ -748,7 +860,17 @@ namespace eInvoice.Models.Migrations
                     b.Navigation("TaxTypes");
                 });
 
+            modelBuilder.Entity("eInvoice.Models.Models.Issuer", b =>
+                {
+                    b.Navigation("Invoices");
+                });
+
             modelBuilder.Entity("eInvoice.Models.Models.Payment", b =>
+                {
+                    b.Navigation("Invoices");
+                });
+
+            modelBuilder.Entity("eInvoice.Models.Models.Receiver", b =>
                 {
                     b.Navigation("Invoices");
                 });

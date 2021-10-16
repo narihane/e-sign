@@ -1,4 +1,5 @@
-﻿using eInvoice.Models.DTOModel.Responses;
+﻿using eInvoice.Models.DTOModel.Invoices;
+using eInvoice.Models.DTOModel.Responses;
 using eInvoice.Models.Models;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace eInvoice.Services.Services
 {
     public interface IDocumentsService
     {
-        void SaveInvoice(Invoice invoice);
+        void SaveInvoice(DocumentsContainer invoice);
 
-        SubmitDocumentsResponse SubmitDocs(List<string> internalIds);
+        Task<SubmitDocumentsResponse> SubmitDocs(List<string> internalIds);
     }
 }

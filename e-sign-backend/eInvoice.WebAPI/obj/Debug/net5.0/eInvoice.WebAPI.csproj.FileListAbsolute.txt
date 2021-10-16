@@ -136,3 +136,16 @@ C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5
 C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.AspNetCore.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+C:\Users\Admin\source\repos\e-sign\e-sign-backend\eInvoice.WebAPI\bin\Debug\net5.0\Serilog.Sinks.File.dll

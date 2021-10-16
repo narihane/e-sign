@@ -11,7 +11,7 @@ namespace eInvoice.Models.DTOModel.Invoices
     {
         public Issuer issuer { get; set; }
         public Receiver receiver { get; set; }
-        public DocumentType documentType { get; set; }
+        public string documentType { get; set; }
         public string documentTypeVersion { get; set; }
         public DateTime dateTimeIssued { get; set; }
         public string taxpayerActivityCode { get; set; }
@@ -29,6 +29,8 @@ namespace eInvoice.Models.DTOModel.Invoices
         public decimal totalSalesAmount { get; set; }
         public decimal totalDiscountAmount { get; set; }
         public decimal netAmount { get; set; }
+
+        // props to be filled from TaxableItems
         public List<TaxTotal> taxTotals { get; set; }
         public decimal extraDiscountAmount { get; set; }
         public decimal totalItemsDiscountAmount { get; set; }

@@ -14,7 +14,7 @@ namespace eInvoice.Models.DTOModel.Invoices
         // Optional if person buyer and invoice amount less than threshold limit defined.
         // Receiver and issuer cannot be the same.
         public string id { get; set; }
-        public IssuerType type { get; set; }
+        public string type { get; set; }
         public string name { get; set; }
         public Address address { get; set; }
     }

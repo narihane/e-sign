@@ -1,13 +1,12 @@
 using eInvoice.Models.AppSettings;
 using eInvoice.Models.Models.DbContext;
 using eInvoice.Services.Clients;
+using eInvoice.Services.Profiles;
 using eInvoice.Services.Repositories;
 using eInvoice.Services.Services;
 using eInvoice.WebAPI.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,10 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Serilog;
 
 namespace eInvoice.WebAPI
 {
@@ -52,13 +48,23 @@ namespace eInvoice.WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eInvoice.WebAPI", Version = "v1" });
             });
 
-            services.AddDbContext<eInvoiceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
+            services.AddSingleton(Log.Logger);
 
-            services.AddScoped<IGenericRepository, GenericRepository>();
+            services.AddDbContext<eInvoiceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
+            services.AddAutoMapper(typeof(DocumentProfile));
+            
+            services.AddHttpContextAccessor();
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITaxAuthorityService, TaxAuthorityServices>();
             services.AddScoped<IDocumentsService, DocumentsService>();
+
             services.AddHttpClient<IdentityServiceHttpClient>();
+            services.AddHttpClient<SystemApiHttpClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +76,9 @@ namespace eInvoice.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "eInvoice.WebAPI v1"));
             }
+
+            app.UseSerilogRequestLogging();
+
             UpgradeDatabase(app);
             app.UseMiddleware<AuthenticationMiddleware>();
 
@@ -91,10 +100,7 @@ namespace eInvoice.WebAPI
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<eInvoiceContext>();
-                if (context != null && context.Database != null)
-                {
-                    context.Database.Migrate();
-                }
+                context.Database.Migrate();
             }
         }
     }

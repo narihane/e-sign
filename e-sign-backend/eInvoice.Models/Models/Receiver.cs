@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace eInvoice.Models.Models
 {
-    public partial class Company
+    public partial class Receiver
     {
-        public Company()
+        public Receiver()
         {
             Invoices = new HashSet<Invoice>();
         }

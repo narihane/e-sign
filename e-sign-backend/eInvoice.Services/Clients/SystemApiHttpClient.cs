@@ -18,12 +18,12 @@ namespace eInvoice.Services.Clients
     {
         private HttpClient client;
         private readonly Apis apisSettings;
-        private readonly HttpContext context;
+        private readonly IHttpContextAccessor context;
 
-        public SystemApiHttpClient(HttpClient client, IOptions<Apis> apisSettings, HttpContext context)
+        public SystemApiHttpClient(HttpClient client, IOptions<Apis> apisSettings, IHttpContextAccessor context)
         {
             client.BaseAddress = new Uri(apisSettings.Value.SystemApi);
-            client.DefaultRequestHeaders.Add("Authorization", context.Request.Headers[HeaderNames.Authorization].ToString());
+            client.DefaultRequestHeaders.Add("Authorization", context.HttpContext.Request.Headers[HeaderNames.Authorization].ToString());
             client.DefaultRequestHeaders.Add("accept", "application/json");
             this.client = client;
             this.apisSettings = apisSettings.Value;
@@ -31,17 +31,17 @@ namespace eInvoice.Services.Clients
         }
 
 
-        public async Task<SubmitDocumentsResponse> SubmitDocuments(List<Document> documents)
+        public async Task<SubmitDocumentsResponse> SubmitDocuments(DocumentsContainer documents)
         {
             var jsonContent = JsonConvert.SerializeObject(documents);
-            var response = await client.PostAsync("/api/v1/documentsubmissions", new StringContent(jsonContent, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync("test", new StringContent(jsonContent, Encoding.UTF8, "application/json"));
+
+            //var response = await client.PostAsync("/api/v1/documentsubmissions", new StringContent(jsonContent, Encoding.UTF8, "application/json"));
             var content = response.Content.ReadAsStringAsync().Result;
             if (!response.IsSuccessStatusCode)
                 throw new Exception(content);
             var submittedDoc = JsonConvert.DeserializeObject<SubmitDocumentsResponse>(content);
             return submittedDoc;
         }
-
-
     }
 }

@@ -1,5 +1,9 @@
-﻿using eInvoice.Models.DTOModel.Responses;
+﻿using AutoMapper;
+using eInvoice.Models.DTOModel.Invoices;
+using eInvoice.Models.DTOModel.Responses;
 using eInvoice.Models.Models;
+using eInvoice.Services.Clients;
+using eInvoice.Services.Helpers;
 using eInvoice.Services.Repositories;
 using System;
 using System.Collections.Generic;
@@ -13,32 +17,51 @@ namespace eInvoice.Services.Services
     {
         private readonly IGenericRepository<Invoice> genericRepo;
         private readonly IInvoiceRepository invoiceRepo;
+        private readonly IMapper mapper;
+        private readonly SystemApiHttpClient client;
 
-        public DocumentsService(IGenericRepository<Invoice> genericRepo, IInvoiceRepository invoiceRepo)
+        public DocumentsService(IGenericRepository<Invoice> genericRepo, IInvoiceRepository invoiceRepo, IMapper mapper, SystemApiHttpClient client)
         {
             this.genericRepo = genericRepo;
             this.invoiceRepo = invoiceRepo;
+            this.mapper = mapper;
+            this.client = client;
         }
 
-        public void SaveInvoice(Invoice invoice)
+        public void SaveInvoice(DocumentsContainer document)
         {
-            if (invoice == null || string.IsNullOrEmpty(invoice.InteranlId))
+            if (document == null || document.documents.Count == 0)
             {
-                throw new Exception("Invoice Empty!");
+                throw new Exception("No Invoice Added!");
             }
+            ////var invoice = mapper.Map<Invoice>(document.documents);
+            var invoice = DocumentMapper.MapFromInvoiceToDocument()
+
+            // perform Validation
             genericRepo.Insert(invoice);
         }
 
-        public SubmitDocumentsResponse SubmitDocs(List<string> internalIds)
+        public async Task<SubmitDocumentsResponse> SubmitDocs(List<string> internalIds)
         {
-            var invoices = new List<Invoice>();
+            var documents = new List<Document>();
             foreach (var id in internalIds)
             {
                 var invoice = invoiceRepo.Getinvoice(id);
                 if (invoice != null)
-                    invoices.Add(invoice);
-            }
+                {
 
+                    ////var document = mapper.Map<Document>(invoice);
+                    var document = DocumentMapper.MapFromInvoiceToDocument(invoice);
+                    SignatureCreater.CreateSignature(document);
+                    documents.Add(document);
+                }
+            }
+            DocumentsContainer docs = new DocumentsContainer
+            {
+                documents = documents
+            };
+            var submittedDocs = await client.SubmitDocuments(docs);
+            return submittedDocs;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace eInvoice.Models.DTOModel.Invoices
 {
     public class Issuer
     {
-        public IssuerType type { get; set; }
+        public string type { get; set; }
         public string id { get; set; }
         public string name { get; set; }
         public Address address { get; set; }

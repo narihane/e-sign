@@ -4,6 +4,7 @@ using eInvoice.Services.Services;
 using eInvoice.WebAPI.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,11 @@ namespace eInvoice.WebAPI.Controllers
 
         [Authorize]
         [HttpPost("save")]
-        public IActionResult SaveInvoice(Invoice invoice)
+        public IActionResult SaveInvoice([FromBody] DocumentsContainer document)
         {
             try
             {
-                documentsService.SaveInvoice(invoice);
+                documentsService.SaveInvoice(document);
                 return Ok();
             }
             catch (Exception ex)
@@ -43,11 +44,11 @@ namespace eInvoice.WebAPI.Controllers
 
         [Authorize]
         [HttpPost("submit")]
-        public IActionResult SubmitDocuments(List<string> internalIds)
+        public async Task<IActionResult> SubmitDocuments([FromBody] List<string> internalIds)
         {
             try
             {
-                documentsService.SubmitDocs(internalIds);
+                var response = await documentsService.SubmitDocs(internalIds);
                 return Ok();
             }
             catch (Exception ex)

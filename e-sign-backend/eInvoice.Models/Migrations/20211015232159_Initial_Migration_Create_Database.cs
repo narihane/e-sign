@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eInvoice.Models.Migrations
 {
-    public partial class createDatabase : Migration
+    public partial class Initial_Migration_Create_Database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,75 @@ namespace eInvoice.Models.Migrations
                 name: "taxes");
 
             migrationBuilder.CreateTable(
-                name: "company",
+                name: "Delivery",
+                schema: "business",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    approach = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    packaging = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    dateValidity = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    exportPort = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    countryOfOrigin = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    grossWeight = table.Column<decimal>(type: "decimal(10,5)", nullable: true),
+                    netWeight = table.Column<decimal>(type: "decimal(10,5)", nullable: true),
+                    terms = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Delivery", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Issuer",
+                schema: "business",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    type = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
+                    registrationNumber = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    branchId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    country = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    governate = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    regionCity = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    street = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    buildingNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    postalCode = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    floor = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    flatNumber = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    landmark = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    priceThreshold = table.Column<decimal>(type: "decimal(10,5)", nullable: true),
+                    additionalInformation = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Issuer", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                schema: "business",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    bankName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    bankAddress = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    bankAccountNo = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    bankAccountIBAN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    swiftCode = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    terms = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Receiver",
                 schema: "business",
                 columns: table => new
                 {
@@ -37,51 +105,11 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_company", x => x.id);
+                    table.PrimaryKey("PK_Receiver", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "delivery",
-                schema: "business",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    approach = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    packaging = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    dateValidity = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    exportPort = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    countryOfOrigin = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    grossWeight = table.Column<decimal>(type: "decimal(10,5)", nullable: true),
-                    netWeight = table.Column<decimal>(type: "decimal(10,5)", nullable: true),
-                    terms = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_delivery", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "payments",
-                schema: "business",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    bankName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    bankAddress = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    bankAccountNo = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    bankAccountIBAN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    swiftCode = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    terms = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_payments", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "users",
+                name: "Users",
                 schema: "business",
                 columns: table => new
                 {
@@ -93,16 +121,17 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_users", x => x.id);
+                    table.PrimaryKey("PK_Users", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "invoice",
+                name: "Invoice",
                 schema: "taxes",
                 columns: table => new
                 {
                     interanlId = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    companyId = table.Column<int>(type: "int", nullable: false),
+                    issuerId = table.Column<int>(type: "int", nullable: false),
+                    receiverId = table.Column<int>(type: "int", nullable: false),
                     documentType = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     documentTypeversion = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     dateIssued = table.Column<DateTime>(type: "date", nullable: false),
@@ -118,36 +147,44 @@ namespace eInvoice.Models.Migrations
                     netAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
                     extraDiscountAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
                     totalItemsDiscountAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    totalAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false)
+                    totalAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
+                    taxpayerActivityCode = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__invoice__1B0114ED32D54757", x => x.interanlId);
+                    table.PrimaryKey("PK__Invoice__1B0114ED4BCD0616", x => x.interanlId);
                     table.ForeignKey(
-                        name: "FK__invoice__company__2A4B4B5E",
-                        column: x => x.companyId,
-                        principalSchema: "business",
-                        principalTable: "company",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK__invoice__deliver__2C3393D0",
+                        name: "FK__Invoice__deliver__5DCAEF64",
                         column: x => x.deliveryId,
                         principalSchema: "business",
-                        principalTable: "delivery",
+                        principalTable: "Delivery",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__invoice__payment__2B3F6F97",
+                        name: "FK__Invoice__issuerI__5AEE82B9",
+                        column: x => x.issuerId,
+                        principalSchema: "business",
+                        principalTable: "Issuer",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK__Invoice__payment__5CD6CB2B",
                         column: x => x.paymentId,
                         principalSchema: "business",
-                        principalTable: "payments",
+                        principalTable: "Payments",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK__Invoice__receive__5BE2A6F2",
+                        column: x => x.receiverId,
+                        principalSchema: "business",
+                        principalTable: "Receiver",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "usersdetails",
+                name: "Usersdetails",
                 schema: "business",
                 columns: table => new
                 {
@@ -164,18 +201,18 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__usersdet__CBA1B257BAC2A7B9", x => x.userid);
+                    table.PrimaryKey("PK__Usersdet__CBA1B2570CDC5B00", x => x.userid);
                     table.ForeignKey(
-                        name: "FK__usersdeta__fullA__5070F446",
+                        name: "FK__Usersdeta__fullA__6E01572D",
                         column: x => x.userid,
                         principalSchema: "business",
-                        principalTable: "users",
+                        principalTable: "Users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "products",
+                name: "Products",
                 schema: "business",
                 columns: table => new
                 {
@@ -203,18 +240,18 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_products", x => x.productid);
+                    table.PrimaryKey("PK_Products", x => x.productid);
                     table.ForeignKey(
-                        name: "FK__products__invoic__31EC6D26",
+                        name: "FK__Products__invoic__6383C8BA",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
-                        principalTable: "invoice",
+                        principalTable: "Invoice",
                         principalColumn: "interanlId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "signatures",
+                name: "Signatures",
                 schema: "business",
                 columns: table => new
                 {
@@ -226,18 +263,18 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_signatures", x => x.id);
+                    table.PrimaryKey("PK_Signatures", x => x.id);
                     table.ForeignKey(
-                        name: "FK__signature__invoi__34C8D9D1",
+                        name: "FK__Signature__invoi__66603565",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
-                        principalTable: "invoice",
+                        principalTable: "Invoice",
                         principalColumn: "interanlId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "submittedDocs",
+                name: "SubmittedDocs",
                 schema: "business",
                 columns: table => new
                 {
@@ -248,18 +285,18 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_submittedDocs", x => x.id);
+                    table.PrimaryKey("PK_SubmittedDocs", x => x.id);
                     table.ForeignKey(
-                        name: "FK__submitted__invoi__2F10007B",
+                        name: "FK__Submitted__invoi__60A75C0F",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
-                        principalTable: "invoice",
+                        principalTable: "Invoice",
                         principalColumn: "interanlId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "taxTypes",
+                name: "TaxTypes",
                 schema: "taxes",
                 columns: table => new
                 {
@@ -273,99 +310,109 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_taxTypes", x => x.id);
+                    table.PrimaryKey("PK_TaxTypes", x => x.id);
                     table.ForeignKey(
-                        name: "FK__taxTypes__invoic__37A5467C",
+                        name: "FK__TaxTypes__invoic__693CA210",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
-                        principalTable: "invoice",
+                        principalTable: "Invoice",
                         principalColumn: "interanlId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_invoice_companyId",
+                name: "IX_Invoice_deliveryId",
                 schema: "taxes",
-                table: "invoice",
-                column: "companyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_invoice_deliveryId",
-                schema: "taxes",
-                table: "invoice",
+                table: "Invoice",
                 column: "deliveryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_invoice_paymentId",
+                name: "IX_Invoice_issuerId",
                 schema: "taxes",
-                table: "invoice",
+                table: "Invoice",
+                column: "issuerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoice_paymentId",
+                schema: "taxes",
+                table: "Invoice",
                 column: "paymentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_products_invoiceInternalId",
-                schema: "business",
-                table: "products",
-                column: "invoiceInternalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_signatures_invoiceInternalId",
-                schema: "business",
-                table: "signatures",
-                column: "invoiceInternalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_submittedDocs_invoiceInternalId",
-                schema: "business",
-                table: "submittedDocs",
-                column: "invoiceInternalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_taxTypes_invoiceInternalId",
+                name: "IX_Invoice_receiverId",
                 schema: "taxes",
-                table: "taxTypes",
+                table: "Invoice",
+                column: "receiverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_invoiceInternalId",
+                schema: "business",
+                table: "Products",
+                column: "invoiceInternalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Signatures_invoiceInternalId",
+                schema: "business",
+                table: "Signatures",
+                column: "invoiceInternalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubmittedDocs_invoiceInternalId",
+                schema: "business",
+                table: "SubmittedDocs",
+                column: "invoiceInternalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaxTypes_invoiceInternalId",
+                schema: "taxes",
+                table: "TaxTypes",
                 column: "invoiceInternalId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "products",
+                name: "Products",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "signatures",
+                name: "Signatures",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "submittedDocs",
+                name: "SubmittedDocs",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "taxTypes",
+                name: "TaxTypes",
                 schema: "taxes");
 
             migrationBuilder.DropTable(
-                name: "usersdetails",
+                name: "Usersdetails",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "invoice",
+                name: "Invoice",
                 schema: "taxes");
 
             migrationBuilder.DropTable(
-                name: "users",
+                name: "Users",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "company",
+                name: "Delivery",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "delivery",
+                name: "Issuer",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "payments",
+                name: "Payments",
+                schema: "business");
+
+            migrationBuilder.DropTable(
+                name: "Receiver",
                 schema: "business");
         }
     }
