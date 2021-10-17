@@ -1,5 +1,5 @@
 ﻿using eInvoice.Models.DTOModel.Invoices;
-using eInvoice.Models.Models;
+//using eInvoice.Models.Models;
 using eInvoice.Services.Services;
 using eInvoice.WebAPI.Helpers;
 using Microsoft.AspNetCore.Http;
@@ -26,36 +26,51 @@ namespace eInvoice.WebAPI.Controllers
             this.logger = logger;
         }
 
-        [Authorize]
-        [HttpPost("save")]
-        public IActionResult SaveInvoice([FromBody] DocumentsContainer document)
-        {
-            try
-            {
-                documentsService.SaveInvoice(document);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, ex.Message);
-                return BadRequest();
-            }
-        }
+        //[Authorize]
+        //[HttpPost("save")]
+        //public IActionResult SaveInvoice([FromBody] DocumentsContainer document)
+        //{
+        //    try
+        //    {
+        //        documentsService.SaveInvoice(document);
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error(ex, ex.Message);
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
-        [Authorize]
-        [HttpPost("submit")]
-        public async Task<IActionResult> SubmitDocuments([FromBody] List<string> internalIds)
-        {
-            try
-            {
-                var response = await documentsService.SubmitDocs(internalIds);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, ex.Message);
-                return BadRequest();
-            }
-        }
+        //[HttpGet("get")]
+        //public IActionResult GetInvoice(string Id)
+        //{
+        //    try
+        //    {
+        //        var invoice = documentsService.GetLocalInvoice(Id);
+        //        return Ok(invoice);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error(ex, ex.Message);
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        //[Authorize]
+        //[HttpPost("submit")]
+        //public async Task<IActionResult> SubmitDocuments([FromBody] List<string> internalIds)
+        //{
+        //    try
+        //    {
+        //        var response = await documentsService.SubmitDocs(internalIds);
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error(ex, ex.Message);
+        //        return BadRequest();
+        //    }
+        //}
     }
 }

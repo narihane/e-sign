@@ -1,4 +1,4 @@
-﻿using eInvoice.Models.Models;
+﻿//using eInvoice.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +10,16 @@ namespace eInvoice.Services.Repositories
     public interface IGenericRepository<T>
         where T: class
     {
-        T GetById(object id);
+        //T GetById(object id);
 
-        IEnumerable<T> GetAll();
+        //IEnumerable<T> GetAll();
 
-        void Insert(T entity);
+        //void Insert(T entity);
 
-        void InsertAll(IEnumerable<T> entities);
+        //void InsertAll(IEnumerable<T> entities);
 
-        void Delete(T entity);
+        //void Delete(T entity);
 
-        void Update(T entity);
+        //void Update(T entity);
     }
 }

@@ -1,5 +1,4 @@
-﻿using eInvoice.Models.Models;
-using eInvoice.Models.Models.DbContext;
+﻿//using eInvoice.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +9,16 @@ namespace eInvoice.Services.Repositories
 {
     public class InvoiceRepository : IInvoiceRepository
     {
-        private readonly eInvoiceContext dbcontext;
+        //private readonly eInvoiceContext dbcontext;
         
-        public InvoiceRepository(eInvoiceContext dbcontext)
-        {
-            this.dbcontext = dbcontext;
-        }
+        //public InvoiceRepository(eInvoiceContext dbcontext)
+        //{
+        //    this.dbcontext = dbcontext;
+        //}
 
-        public Invoice Getinvoice(string internalId)
-        {
-            return dbcontext.Set<Invoice>().Where(x => x.InteranlId == internalId).FirstOrDefault();
-        }
+        //public Invoice Getinvoice(string internalId)
+        //{
+        //    return dbcontext.Set<Invoice>().Where(x => x.InteranlId == internalId).FirstOrDefault();
+        //}
     }
 }

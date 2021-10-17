@@ -24,58 +24,58 @@ namespace eInvoice.WebAPI.Controllers
             this.taxAuthorityService = taxAuthorityService;
         }
 
-        [HttpPost("login")]
-        public IActionResult LogIn(AuthRequestModel model)
-        {
-            try
-            {
-                var response = userService.LogIn(model);
+        //[HttpPost("login")]
+        //public IActionResult LogIn(AuthRequestModel model)
+        //{
+        //    try
+        //    {
+        //        var response = userService.LogIn(model);
 
-                if (response == null)
-                    return BadRequest(new { message = "Username or password is incorrect" });
+        //        if (response == null)
+        //            return BadRequest(new { message = "Username or password is incorrect" });
 
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, ex.Message);
-                return Unauthorized();
-            }
+        //        return Ok(response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error(ex, ex.Message);
+        //        return Unauthorized();
+        //    }
 
-        }
+        //}
 
-        [HttpPost]
-        [Route("register")]
-        public IActionResult Register(UserRegisterationModel model)
-        {
-            try
-            {
-                userService.Register(model);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, ex.Message);
-                return Unauthorized();
-            }
-        }
+        //[HttpPost]
+        //[Route("register")]
+        //public IActionResult Register(UserRegisterationModel model)
+        //{
+        //    try
+        //    {
+        //        userService.Register(model);
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error(ex, ex.Message);
+        //        return Unauthorized();
+        //    }
+        //}
 
-        [Authorize]
-        [HttpGet("Users")]
-        public IActionResult GetAll()
-        {
-            try
-            {
-                var users = userService.GetAll();
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, ex.Message);
-                return BadRequest();
-            }
-            
-        }
+        //[Authorize]
+        //[HttpGet("Users")]
+        //public IActionResult GetAll()
+        //{
+        //    try
+        //    {
+        //        var users = userService.GetAll();
+        //        return Ok(users);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error(ex, ex.Message);
+        //        return BadRequest();
+        //    }
+
+        //}
 
 
         [HttpGet("TaxPayer/Login")]

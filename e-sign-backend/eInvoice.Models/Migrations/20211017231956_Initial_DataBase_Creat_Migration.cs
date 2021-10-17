@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eInvoice.Models.Migrations
 {
-    public partial class Initial_Migration_Create_Database : Migration
+    public partial class Initial_DataBase_Creat_Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -142,40 +142,40 @@ namespace eInvoice.Models.Migrations
                     proformaInvoiceNumber = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
                     paymentId = table.Column<int>(type: "int", nullable: true),
                     deliveryId = table.Column<int>(type: "int", nullable: true),
-                    totalSalesAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    totalDiscountAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    netAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    extraDiscountAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    totalItemsDiscountAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    totalAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
+                    totalSalesAmount = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    totalDiscountAmount = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    netAmount = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    extraDiscountAmount = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    totalItemsDiscountAmount = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    totalAmount = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
                     taxpayerActivityCode = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Invoice__1B0114ED4BCD0616", x => x.interanlId);
+                    table.PrimaryKey("PK__Invoice__1B0114EDF4EDCF06", x => x.interanlId);
                     table.ForeignKey(
-                        name: "FK__Invoice__deliver__5DCAEF64",
+                        name: "FK__Invoice__deliver__60A75C0F",
                         column: x => x.deliveryId,
                         principalSchema: "business",
                         principalTable: "Delivery",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__Invoice__issuerI__5AEE82B9",
+                        name: "FK__Invoice__issuerI__5DCAEF64",
                         column: x => x.issuerId,
                         principalSchema: "business",
                         principalTable: "Issuer",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__Invoice__payment__5CD6CB2B",
+                        name: "FK__Invoice__payment__5FB337D6",
                         column: x => x.paymentId,
                         principalSchema: "business",
                         principalTable: "Payments",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__Invoice__receive__5BE2A6F2",
+                        name: "FK__Invoice__receive__5EBF139D",
                         column: x => x.receiverId,
                         principalSchema: "business",
                         principalTable: "Receiver",
@@ -201,9 +201,9 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Usersdet__CBA1B2570CDC5B00", x => x.userid);
+                    table.PrimaryKey("PK__Usersdet__CBA1B257D818C674", x => x.userid);
                     table.ForeignKey(
-                        name: "FK__Usersdeta__fullA__6E01572D",
+                        name: "FK__Usersdeta__fullA__70DDC3D8",
                         column: x => x.userid,
                         principalSchema: "business",
                         principalTable: "Users",
@@ -223,26 +223,26 @@ namespace eInvoice.Models.Migrations
                     itemType = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     itemCode = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     unitType = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    quantity = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
+                    quantity = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
                     currencySold = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    amountEGP = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    amountSold = table.Column<decimal>(type: "decimal(10,5)", nullable: true),
-                    currencyExchangeRate = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    salesTotal = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    total = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    valueDifference = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    totalTaxableFees = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    netTotal = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    itemsDiscount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
-                    discountRate = table.Column<decimal>(type: "decimal(10,5)", nullable: true),
-                    discountAmount = table.Column<decimal>(type: "decimal(10,5)", nullable: true),
-                    internalCode = table.Column<decimal>(type: "decimal(10,5)", nullable: true)
+                    amountEGP = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    amountSold = table.Column<decimal>(type: "decimal(20,5)", nullable: true),
+                    currencyExchangeRate = table.Column<decimal>(type: "decimal(20,5)", nullable: true),
+                    salesTotal = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    total = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    valueDifference = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    totalTaxableFees = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    netTotal = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    itemsDiscount = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
+                    discountRate = table.Column<decimal>(type: "decimal(20,5)", nullable: true),
+                    discountAmount = table.Column<decimal>(type: "decimal(20,5)", nullable: true),
+                    internalCode = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.productid);
                     table.ForeignKey(
-                        name: "FK__Products__invoic__6383C8BA",
+                        name: "FK__Products__invoic__66603565",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
                         principalTable: "Invoice",
@@ -258,14 +258,14 @@ namespace eInvoice.Models.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     type = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
-                    value = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     invoiceInternalId = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Signatures", x => x.id);
                     table.ForeignKey(
-                        name: "FK__Signature__invoi__66603565",
+                        name: "FK__Signature__invoi__693CA210",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
                         principalTable: "Invoice",
@@ -287,7 +287,7 @@ namespace eInvoice.Models.Migrations
                 {
                     table.PrimaryKey("PK_SubmittedDocs", x => x.id);
                     table.ForeignKey(
-                        name: "FK__Submitted__invoi__60A75C0F",
+                        name: "FK__Submitted__invoi__6383C8BA",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
                         principalTable: "Invoice",
@@ -305,14 +305,14 @@ namespace eInvoice.Models.Migrations
                     taxType = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     amount = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
                     subType = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    rate = table.Column<decimal>(type: "decimal(10,5)", nullable: false),
+                    rate = table.Column<decimal>(type: "decimal(20,5)", nullable: false),
                     invoiceInternalId = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TaxTypes", x => x.id);
                     table.ForeignKey(
-                        name: "FK__TaxTypes__invoic__693CA210",
+                        name: "FK__TaxTypes__invoic__6C190EBB",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
                         principalTable: "Invoice",

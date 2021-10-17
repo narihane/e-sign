@@ -1,4 +1,4 @@
-﻿using eInvoice.Models.Models;
+﻿//using eInvoice.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace eInvoice.Services.Repositories
 {
     public interface IUserRepository
     {
-        User GetUser(string username, string password);
+        //User GetUser(string username, string password);
     }
 }

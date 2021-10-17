@@ -9,7 +9,7 @@ namespace eInvoice.Models.DTOModel.Invoices
 {
     public class Signature
     {
-        public string type { get; set; }
+        public string signatureType { get; set; }
         public string value { get; set; }
     }
 }

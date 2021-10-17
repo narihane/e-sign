@@ -17,7 +17,7 @@ namespace eInvoice.Models.Models
         public string CurrencySold { get; set; }
         public decimal AmountEgp { get; set; }
         public decimal? AmountSold { get; set; }
-        public decimal CurrencyExchangeRate { get; set; }
+        public decimal? CurrencyExchangeRate { get; set; }
         public decimal SalesTotal { get; set; }
         public decimal Total { get; set; }
         public decimal ValueDifference { get; set; }
@@ -26,7 +26,7 @@ namespace eInvoice.Models.Models
         public decimal ItemsDiscount { get; set; }
         public decimal? DiscountRate { get; set; }
         public decimal? DiscountAmount { get; set; }
-        public decimal? InternalCode { get; set; }
+        public string InternalCode { get; set; }
 
         public virtual Invoice InvoiceInternal { get; set; }
     }

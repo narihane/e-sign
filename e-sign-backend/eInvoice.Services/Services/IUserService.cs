@@ -1,5 +1,5 @@
 ﻿using eInvoice.Models.DTOModel;
-using eInvoice.Models.Models;
+//using eInvoice.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace eInvoice.Services.Services
 {
     public interface IUserService
     {
-        AuthResponseModel LogIn(AuthRequestModel model);
-        void Register(UserRegisterationModel model);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
+        //AuthResponseModel LogIn(AuthRequestModel model);
+        //void Register(UserRegisterationModel model);
+        //IEnumerable<User> GetAll();
+        //User GetById(int id);
 
     }
 }

@@ -1,4 +1,4 @@
-﻿using eInvoice.Models.Models;
+﻿//using eInvoice.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +16,13 @@ namespace eInvoice.Models.DTOModel
         public string Token { get; set; }
 
 
-        public AuthResponseModel(User user, string token)
-        {
-            Id = user.Id;
-            FirstName = user.Usersdetail.FirstName;
-            LastName = user.Usersdetail.LastName;
-            Username = user.Username;
-            Token = token;
-        }
+        //public AuthResponseModel(User user, string token)
+        //{
+        //    Id = user.Id;
+        //    FirstName = user.Usersdetail.FirstName;
+        //    LastName = user.Usersdetail.LastName;
+        //    Username = user.Username;
+        //    Token = token;
+        //}
     }
 }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace eInvoice.Models.Models.DbContext
+namespace eInvoice.Models.Models
 {
-    public partial class eInvoiceContext : Microsoft.EntityFrameworkCore.DbContext
+    public partial class eInvoiceContext : DbContext
     {
         public eInvoiceContext()
         {
@@ -84,7 +84,7 @@ namespace eInvoice.Models.Models.DbContext
             modelBuilder.Entity<Invoice>(entity =>
             {
                 entity.HasKey(e => e.InteranlId)
-                    .HasName("PK__Invoice__1B0114ED4BCD0616");
+                    .HasName("PK__Invoice__1B0114EDF4EDCF06");
 
                 entity.ToTable("Invoice", "taxes");
 
@@ -112,13 +112,13 @@ namespace eInvoice.Models.Models.DbContext
                     .HasColumnName("documentTypeversion");
 
                 entity.Property(e => e.ExtraDiscountAmount)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("extraDiscountAmount");
 
                 entity.Property(e => e.IssuerId).HasColumnName("issuerId");
 
                 entity.Property(e => e.NetAmount)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("netAmount");
 
                 entity.Property(e => e.PaymentId).HasColumnName("paymentId");
@@ -157,42 +157,42 @@ namespace eInvoice.Models.Models.DbContext
                     .HasColumnName("taxpayerActivityCode");
 
                 entity.Property(e => e.TotalAmount)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("totalAmount");
 
                 entity.Property(e => e.TotalDiscountAmount)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("totalDiscountAmount");
 
                 entity.Property(e => e.TotalItemsDiscountAmount)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("totalItemsDiscountAmount");
 
                 entity.Property(e => e.TotalSalesAmount)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("totalSalesAmount");
 
                 entity.HasOne(d => d.Delivery)
                     .WithMany(p => p.Invoices)
                     .HasForeignKey(d => d.DeliveryId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Invoice__deliver__5DCAEF64");
+                    .HasConstraintName("FK__Invoice__deliver__60A75C0F");
 
                 entity.HasOne(d => d.Issuer)
                     .WithMany(p => p.Invoices)
                     .HasForeignKey(d => d.IssuerId)
-                    .HasConstraintName("FK__Invoice__issuerI__5AEE82B9");
+                    .HasConstraintName("FK__Invoice__issuerI__5DCAEF64");
 
                 entity.HasOne(d => d.Payment)
                     .WithMany(p => p.Invoices)
                     .HasForeignKey(d => d.PaymentId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Invoice__payment__5CD6CB2B");
+                    .HasConstraintName("FK__Invoice__payment__5FB337D6");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.Invoices)
                     .HasForeignKey(d => d.ReceiverId)
-                    .HasConstraintName("FK__Invoice__receive__5BE2A6F2");
+                    .HasConstraintName("FK__Invoice__receive__5EBF139D");
             });
 
             modelBuilder.Entity<Issuer>(entity =>
@@ -308,15 +308,15 @@ namespace eInvoice.Models.Models.DbContext
                 entity.Property(e => e.Productid).HasColumnName("productid");
 
                 entity.Property(e => e.AmountEgp)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("amountEGP");
 
                 entity.Property(e => e.AmountSold)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("amountSold");
 
                 entity.Property(e => e.CurrencyExchangeRate)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("currencyExchangeRate");
 
                 entity.Property(e => e.CurrencySold)
@@ -332,15 +332,16 @@ namespace eInvoice.Models.Models.DbContext
                     .HasColumnName("description");
 
                 entity.Property(e => e.DiscountAmount)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("discountAmount");
 
                 entity.Property(e => e.DiscountRate)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("discountRate");
 
                 entity.Property(e => e.InternalCode)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
                     .HasColumnName("internalCode");
 
                 entity.Property(e => e.InvoiceInternalId)
@@ -362,27 +363,27 @@ namespace eInvoice.Models.Models.DbContext
                     .HasColumnName("itemType");
 
                 entity.Property(e => e.ItemsDiscount)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("itemsDiscount");
 
                 entity.Property(e => e.NetTotal)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("netTotal");
 
                 entity.Property(e => e.Quantity)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("quantity");
 
                 entity.Property(e => e.SalesTotal)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("salesTotal");
 
                 entity.Property(e => e.Total)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("total");
 
                 entity.Property(e => e.TotalTaxableFees)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("totalTaxableFees");
 
                 entity.Property(e => e.UnitType)
@@ -392,13 +393,13 @@ namespace eInvoice.Models.Models.DbContext
                     .HasColumnName("unitType");
 
                 entity.Property(e => e.ValueDifference)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("valueDifference");
 
                 entity.HasOne(d => d.InvoiceInternal)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.InvoiceInternalId)
-                    .HasConstraintName("FK__Products__invoic__6383C8BA");
+                    .HasConstraintName("FK__Products__invoic__66603565");
             });
 
             modelBuilder.Entity<Receiver>(entity =>
@@ -492,13 +493,12 @@ namespace eInvoice.Models.Models.DbContext
 
                 entity.Property(e => e.Value)
                     .IsRequired()
-                    .HasMaxLength(255)
                     .HasColumnName("value");
 
                 entity.HasOne(d => d.InvoiceInternal)
                     .WithMany(p => p.Signatures)
                     .HasForeignKey(d => d.InvoiceInternalId)
-                    .HasConstraintName("FK__Signature__invoi__66603565");
+                    .HasConstraintName("FK__Signature__invoi__693CA210");
             });
 
             modelBuilder.Entity<SubmittedDoc>(entity =>
@@ -528,7 +528,7 @@ namespace eInvoice.Models.Models.DbContext
                 entity.HasOne(d => d.InvoiceInternal)
                     .WithMany(p => p.SubmittedDocs)
                     .HasForeignKey(d => d.InvoiceInternalId)
-                    .HasConstraintName("FK__Submitted__invoi__60A75C0F");
+                    .HasConstraintName("FK__Submitted__invoi__6383C8BA");
             });
 
             modelBuilder.Entity<TaxType>(entity =>
@@ -548,7 +548,7 @@ namespace eInvoice.Models.Models.DbContext
                     .HasColumnName("invoiceInternalId");
 
                 entity.Property(e => e.Rate)
-                    .HasColumnType("decimal(10, 5)")
+                    .HasColumnType("decimal(20, 5)")
                     .HasColumnName("rate");
 
                 entity.Property(e => e.SubType)
@@ -564,7 +564,7 @@ namespace eInvoice.Models.Models.DbContext
                 entity.HasOne(d => d.InvoiceInternal)
                     .WithMany(p => p.TaxTypes)
                     .HasForeignKey(d => d.InvoiceInternalId)
-                    .HasConstraintName("FK__TaxTypes__invoic__693CA210");
+                    .HasConstraintName("FK__TaxTypes__invoic__6C190EBB");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -595,7 +595,7 @@ namespace eInvoice.Models.Models.DbContext
             modelBuilder.Entity<Usersdetail>(entity =>
             {
                 entity.HasKey(e => e.Userid)
-                    .HasName("PK__Usersdet__CBA1B2570CDC5B00");
+                    .HasName("PK__Usersdet__CBA1B257D818C674");
 
                 entity.ToTable("Usersdetails", "business");
 
@@ -660,7 +660,7 @@ namespace eInvoice.Models.Models.DbContext
                 entity.HasOne(d => d.User)
                     .WithOne(p => p.Usersdetail)
                     .HasForeignKey<Usersdetail>(d => d.Userid)
-                    .HasConstraintName("FK__Usersdeta__fullA__6E01572D");
+                    .HasConstraintName("FK__Usersdeta__fullA__70DDC3D8");
             });
 
             OnModelCreatingPartial(modelBuilder);
