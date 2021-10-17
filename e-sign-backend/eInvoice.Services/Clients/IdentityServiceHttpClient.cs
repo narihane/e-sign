@@ -21,7 +21,6 @@ namespace eInvoice.Services.Clients
         {
             client.BaseAddress = new Uri(apisSettings.Value.IdentityService);
             client.DefaultRequestHeaders.Clear();
-            //client.DefaultRequestHeaders.Add("Content-Type", $"application/x-www-form-urlencoded");
             this.client = client;
             this.apisSettings = apisSettings.Value;
         }

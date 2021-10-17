@@ -1,5 +1,5 @@
 using eInvoice.Models.AppSettings;
-//using eInvoice.Models.Models;
+using eInvoice.Models.Models;
 using eInvoice.Services.Clients;
 using eInvoice.Services.Profiles;
 using eInvoice.Services.Repositories;
@@ -50,7 +50,7 @@ namespace eInvoice.WebAPI
 
             services.AddSingleton(Log.Logger);
 
-            //services.AddDbContext<eInvoiceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
+            services.AddDbContext<eInvoiceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
             services.AddAutoMapper(typeof(DocumentProfile));
             
             services.AddHttpContextAccessor();
@@ -79,7 +79,7 @@ namespace eInvoice.WebAPI
 
             app.UseSerilogRequestLogging();
 
-            //UpgradeDatabase(app);
+            UpgradeDatabase(app);
             app.UseMiddleware<AuthenticationMiddleware>();
 
             app.UseHttpsRedirection();
@@ -97,11 +97,11 @@ namespace eInvoice.WebAPI
 
         private void UpgradeDatabase(IApplicationBuilder app)
         {
-            //using (var serviceScope = app.ApplicationServices.CreateScope())
-            //{
-            //    var context = serviceScope.ServiceProvider.GetService<eInvoiceContext>();
-            //    context.Database.Migrate();
-            //}
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<eInvoiceContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }
