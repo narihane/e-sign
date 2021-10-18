@@ -4,6 +4,7 @@ using eInvoice.Models.DTOModel.Responses;
 using eInvoice.Models.Models;
 using eInvoice.Services.Clients;
 using eInvoice.Services.Helpers;
+using eInvoice.Services.Helpers.ECertificate;
 using eInvoice.Services.Repositories;
 using System;
 using System.Collections.Generic;
@@ -71,7 +72,7 @@ namespace eInvoice.Services.Services
 
                     ////var document = mapper.Map<Document>(invoice);
                     var document = DocumentMapper.MapInvoiceToDocument(invoice);
-                    SignatureCreater.CreateSignature(document);
+                    document = SignatureCreater.CreateSignature(document);
                     documents.Add(document);
                 }
             }

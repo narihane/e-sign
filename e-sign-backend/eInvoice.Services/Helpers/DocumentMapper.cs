@@ -15,7 +15,7 @@ namespace eInvoice.Services.Helpers
             List<TaxableItem> taxableItems;
 
             MapTaxes(invoice, out taxTotals, out taxableItems);
-            var signatures = MapSignatures(invoice);
+            //var signatures = MapSignatures(invoice);
             var invoiceLines = MapInvoiceLines(invoice, taxableItems);
 
             Document document = new Document
@@ -31,7 +31,7 @@ namespace eInvoice.Services.Helpers
                 purchaseOrderReference = invoice.PurchaseOrderReference,
                 salesOrderDescription = invoice.SalesOrderDescription,
                 salesOrderReference = invoice.SalesOrderReference,
-                signatures = signatures,
+                //signatures = signatures,
                 taxpayerActivityCode = invoice.TaxpayerActivityCode,
                 totalAmount = invoice.TotalAmount,
                 totalDiscountAmount = invoice.TotalDiscountAmount,
