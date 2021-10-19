@@ -143,6 +143,10 @@
             "Pkcs11Interop": {
               "target": "Package",
               "version": "[5.1.2, )"
+            },
+            "System.Security.Cryptography.Pkcs": {
+              "target": "Package",
+              "version": "[5.0.1, )"
             }
           },
           "imports": [

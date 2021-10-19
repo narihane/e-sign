@@ -15,10 +15,13 @@ namespace eInvoice.Services.Helpers.ECertificate
 {
     public class Encryptor
     {
-        //TODO: UNKNOWN VARIABLES
+        //UNKNOWN   
         private static string DllLibPath = "";
-        private static string TokenPin = "";
         private static string issuerName = "Egypt Trust Sealing CA";
+
+        //For Token system not HSM, differs for each client
+        private static string TokenPin = "";
+        //Defined Hasing variables from ESignature
         private static string ContentInfoOId = "1.2.840.113549.1.7.5";
         private static string DerObjectIdentifier = "1.2.840.113549.1.9.16.2.47";
         private static string DigestAlgorithmOId = "2.16.840.1.101.3.4.2.1";

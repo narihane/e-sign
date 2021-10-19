@@ -69,7 +69,6 @@ namespace eInvoice.Services.Services
                 var invoice = invoiceRepo.Getinvoice(id);
                 if (invoice != null)
                 {
-
                     ////var document = mapper.Map<Document>(invoice);
                     var document = DocumentMapper.MapInvoiceToDocument(invoice);
                     document = SignatureCreater.CreateSignature(document);
