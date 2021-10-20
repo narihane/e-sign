@@ -42,12 +42,27 @@ namespace eInvoice.WebAPI.Controllers
             }
         }
 
-        [HttpGet("get")]
+        [HttpGet("get/{Id}")]
         public IActionResult GetInvoice(string Id)
         {
             try
             {
                 var invoice = documentsService.GetLocalInvoice(Id);
+                return Ok(invoice);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get")]
+        public IActionResult GetAllInvoices()
+        {
+            try
+            {
+                var invoice = documentsService.GetAllInvoices();
                 return Ok(invoice);
             }
             catch (Exception ex)

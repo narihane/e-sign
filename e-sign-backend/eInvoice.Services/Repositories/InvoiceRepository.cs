@@ -18,7 +18,7 @@ namespace eInvoice.Services.Repositories
 
         public Invoice Getinvoice(string internalId)
         {
-            return dbcontext.Set<Invoice>().Where(x => x.InteranlId == internalId).FirstOrDefault();
+            return dbcontext.Set<Invoice>().SingleOrDefault(x=>x.InteranlId == internalId);
         }
     }
 }

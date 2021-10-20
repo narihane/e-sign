@@ -15,6 +15,8 @@ namespace eInvoice.Services.Services
 
         Invoice GetLocalInvoice(string Id);
 
+        IEnumerable<Invoice> GetAllInvoices();
+
         Task<SubmitDocumentsResponse> SubmitDocs(List<string> internalIds);
     }
 }

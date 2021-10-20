@@ -115,18 +115,18 @@ namespace eInvoice.Services.Helpers
         {
             List<Product> products = new List<Product>();
             List<TaxType> taxTypes = new List<TaxType>();
-            List<Models.Models.Signature> signatures = new List<Models.Models.Signature>();
+            //List<Models.Models.Signature> signatures = new List<Models.Models.Signature>();
 
-            foreach (var esignature in document.signatures)
-            {
-                var signature = new Models.Models.Signature
-                {
-                    Type = esignature.signatureType,
-                    Value = esignature.value,
-                    InvoiceInternalId = document.internalId
-                };
-                signatures.Add(signature);
-            }
+            //foreach (var esignature in document.signatures)
+            //{
+            //    var signature = new Models.Models.Signature
+            //    {
+            //        Type = esignature.signatureType,
+            //        Value = esignature.value,
+            //        InvoiceInternalId = document.internalId
+            //    };
+            //    signatures.Add(signature);
+            //}
 
             foreach (var invoiceLine in document.invoiceLines)
             {
@@ -222,7 +222,7 @@ namespace eInvoice.Services.Helpers
                 TotalSalesAmount = document.totalSalesAmount,
                 TaxTypes = taxTypes,
                 Products = products,
-                Signatures = signatures
+                //Signatures = signatures
             };
 
             if (document.delivery != null)

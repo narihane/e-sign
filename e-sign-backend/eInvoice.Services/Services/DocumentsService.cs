@@ -29,6 +29,13 @@ namespace eInvoice.Services.Services
             this.client = client;
         }
 
+        public IEnumerable<Invoice> GetAllInvoices()
+        {
+            var invoices = genericRepo.GetAll();
+
+            return invoices;
+        }
+
         public Invoice GetLocalInvoice(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
