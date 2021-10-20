@@ -1,1 +1,162 @@
-<p>user-main works!</p>
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="100">
+  <div class="container">
+    <div class="navbar-translate">
+      <a class="navbar-brand" href="./"><span>E•Sign</span> System</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="example-navbar-primary">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="tim-icons icon-single-02"></i> Profile
+          </a>
+        </li>
+        <li class="dropdown nav-item">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+            <i class="tim-icons icon-settings-gear-63"></i> Settings
+          </a>
+          <div class="dropdown-menu dropdown-with-icons">
+            <a href="https://demos.creative-tim.com/blk-design-system/docs/1.0/getting-started/overview.html"
+              class="dropdown-item">
+              <i class="tim-icons icon-paper"></i> Help
+            </a>
+            <a href="examples/register-page.html" class="dropdown-item">
+              <i class="tim-icons icon-bullet-list-67"></i>FAQ
+            </a>
+            <a href="examples/profile-page.html" class="dropdown-item">
+              <i class="tim-icons icon-single-02"></i>Sign out
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="page-header">
+    <div class="page-header-image"></div>
+    <div class="content">
+      <div class="container">
+        <ul class="nav nav-pills nav-pills-primary nav-pills-icons">
+          <li class="nav-item">
+            <a class="nav-link active show" data-toggle="tab" href="#add" role="tablist" aria-expanded="false">
+              <i class="tim-icons icon-simple-add"></i> Add Invoice
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#edit" role="tablist" aria-expanded="false">
+              <i class="tim-icons icon-pencil"></i> Edit Invoice
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content tab-space">
+          <div class="tab-pane active" id="add" aria-expanded="true">
+            <!-- Add Invoice Form -->
+            <div class="card card-register">
+              <form class="form" [formGroup]="addInvoice" (ngSubmit)="onInvoiceAdd()">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="tim-icons icon-single-02"></i>
+                          </div>
+                        </div>
+                        <input type="text" placeholder="Name" class="form-control" id="name" name="name" required
+                          formControlName="name">
+                      </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="tim-icons icon-mobile"></i>
+                          </div>
+                        </div>
+                        <input type="text" placeholder="Number" class="form-control" id="number" name="number" required
+                          formControlName="number">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="tim-icons icon-lock-circle"></i>
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Model" class="form-control" id="model"
+                          name="model" required formControlName="model">
+                      </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="tim-icons icon-lock-circle"></i>
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Serial#" class="form-control" id="serial"
+                          name="serial" required formControlName="serial">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+                      <label for="exampleFormControlSelect1">Quantity</label>
+                      <select class="form-control" id="exampleFormControlSelect1">
+                        <option style="color: black;">1</option>
+                        <option style="color: black;">2</option>
+                        <option style="color: black;">3</option>
+                        <option style="color: black;">4</option>
+                        <option style="color: black;">5</option>
+                        <option style="color: black;">6</option>
+                        <option style="color: black;">7</option>
+                        <option style="color: black;">8</option>
+                        <option style="color: black;">9</option>
+                        <option style="color: black;">10</option>
+                      </select>
+
+                      <label for="exampleFormControlSelect2">Karat</label>
+                      <select class="form-control" id="exampleFormControlSelect2">
+                        <option style="color: black;">18</option>
+                        <option style="color: black;">21</option>
+                        <option style="color: black;">24</option>
+                      </select>
+                    </div>
+                    <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="tim-icons icon-lock-circle"></i>
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Weight in gm" class="form-control"
+                          id="weight" name="weight" required formControlName="weight">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button href="javascript:void(0)" type="submit"
+                      class="btn btn-primary btn-round btn-lg">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="tab-pane" id="edit" aria-expanded="false">
+            <!-- Edit invoices  -->
+            <h1> Feature Soon!</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
