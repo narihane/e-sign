@@ -26,53 +26,6 @@ namespace eInvoice.WebAPI.Controllers
             this.logger = logger;
         }
 
-        [Authorize]
-        [HttpPost("save")]
-        public IActionResult SaveInvoice([FromBody] DocumentsContainer document)
-        {
-            try
-            {
-                documentsService.SaveInvoice(document);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("get/{Id}")]
-        public IActionResult GetInvoice(string Id)
-        {
-            try
-            {
-                var invoice = documentsService.GetLocalInvoice(Id);
-                return Ok(invoice);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("get")]
-        public IActionResult GetAllInvoices()
-        {
-            try
-            {
-                var invoice = documentsService.GetAllInvoices();
-                return Ok(invoice);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Authorize]
         [HttpPost("submit")]
         public async Task<IActionResult> SubmitDocuments([FromBody] List<string> internalIds)
         {

@@ -10,8 +10,8 @@ using eInvoice.Models.Models;
 namespace eInvoice.Models.Migrations
 {
     [DbContext(typeof(eInvoiceContext))]
-    [Migration("20211017231956_Initial_DataBase_Creat_Migration")]
-    partial class Initial_DataBase_Creat_Migration
+    [Migration("20211020203641_Create_Database_Initial_Migration")]
+    partial class Create_Database_Initial_Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,28 @@ namespace eInvoice.Models.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("eInvoice.Models.Models.CodeTemplate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FileType")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CodeTemplates", "business");
+                });
 
             modelBuilder.Entity("eInvoice.Models.Models.Delivery", b =>
                 {
@@ -177,7 +199,7 @@ namespace eInvoice.Models.Migrations
                         .HasColumnName("totalSalesAmount");
 
                     b.HasKey("InteranlId")
-                        .HasName("PK__Invoice__1B0114EDF4EDCF06");
+                        .HasName("PK__Invoice__1B0114ED61A5BE0B");
 
                     b.HasIndex("DeliveryId");
 
@@ -743,7 +765,7 @@ namespace eInvoice.Models.Migrations
                         .HasColumnName("street");
 
                     b.HasKey("Userid")
-                        .HasName("PK__Usersdet__CBA1B257D818C674");
+                        .HasName("PK__Usersdet__CBA1B25706F63767");
 
                     b.ToTable("Usersdetails", "business");
                 });
@@ -753,26 +775,26 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Delivery", "Delivery")
                         .WithMany("Invoices")
                         .HasForeignKey("DeliveryId")
-                        .HasConstraintName("FK__Invoice__deliver__60A75C0F")
+                        .HasConstraintName("FK__Invoice__deliver__32E0915F")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("eInvoice.Models.Models.Issuer", "Issuer")
                         .WithMany("Invoices")
                         .HasForeignKey("IssuerId")
-                        .HasConstraintName("FK__Invoice__issuerI__5DCAEF64")
+                        .HasConstraintName("FK__Invoice__issuerI__300424B4")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("eInvoice.Models.Models.Payment", "Payment")
                         .WithMany("Invoices")
                         .HasForeignKey("PaymentId")
-                        .HasConstraintName("FK__Invoice__payment__5FB337D6")
+                        .HasConstraintName("FK__Invoice__payment__31EC6D26")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("eInvoice.Models.Models.Receiver", "Receiver")
                         .WithMany("Invoices")
                         .HasForeignKey("ReceiverId")
-                        .HasConstraintName("FK__Invoice__receive__5EBF139D")
+                        .HasConstraintName("FK__Invoice__receive__30F848ED")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -790,7 +812,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Invoice", "InvoiceInternal")
                         .WithMany("Products")
                         .HasForeignKey("InvoiceInternalId")
-                        .HasConstraintName("FK__Products__invoic__66603565")
+                        .HasConstraintName("FK__Products__invoic__38996AB5")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -802,7 +824,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Invoice", "InvoiceInternal")
                         .WithMany("Signatures")
                         .HasForeignKey("InvoiceInternalId")
-                        .HasConstraintName("FK__Signature__invoi__693CA210")
+                        .HasConstraintName("FK__Signature__invoi__3B75D760")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -814,7 +836,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Invoice", "InvoiceInternal")
                         .WithMany("SubmittedDocs")
                         .HasForeignKey("InvoiceInternalId")
-                        .HasConstraintName("FK__Submitted__invoi__6383C8BA")
+                        .HasConstraintName("FK__Submitted__invoi__35BCFE0A")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -826,7 +848,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.Invoice", "InvoiceInternal")
                         .WithMany("TaxTypes")
                         .HasForeignKey("InvoiceInternalId")
-                        .HasConstraintName("FK__TaxTypes__invoic__6C190EBB")
+                        .HasConstraintName("FK__TaxTypes__invoic__3E52440B")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -838,7 +860,7 @@ namespace eInvoice.Models.Migrations
                     b.HasOne("eInvoice.Models.Models.User", "User")
                         .WithOne("Usersdetail")
                         .HasForeignKey("eInvoice.Models.Models.Usersdetail", "Userid")
-                        .HasConstraintName("FK__Usersdeta__fullA__70DDC3D8")
+                        .HasConstraintName("FK__Usersdeta__fullA__4316F928")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

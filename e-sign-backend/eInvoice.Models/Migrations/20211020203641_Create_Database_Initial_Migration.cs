@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eInvoice.Models.Migrations
 {
-    public partial class Initial_DataBase_Creat_Migration : Migration
+    public partial class Create_Database_Initial_Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,6 +12,21 @@ namespace eInvoice.Models.Migrations
 
             migrationBuilder.EnsureSchema(
                 name: "taxes");
+
+            migrationBuilder.CreateTable(
+                name: "CodeTemplates",
+                schema: "business",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    FileType = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 50, nullable: true),
+                    File = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CodeTemplates", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Delivery",
@@ -152,30 +167,30 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Invoice__1B0114EDF4EDCF06", x => x.interanlId);
+                    table.PrimaryKey("PK__Invoice__1B0114ED61A5BE0B", x => x.interanlId);
                     table.ForeignKey(
-                        name: "FK__Invoice__deliver__60A75C0F",
+                        name: "FK__Invoice__deliver__32E0915F",
                         column: x => x.deliveryId,
                         principalSchema: "business",
                         principalTable: "Delivery",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__Invoice__issuerI__5DCAEF64",
+                        name: "FK__Invoice__issuerI__300424B4",
                         column: x => x.issuerId,
                         principalSchema: "business",
                         principalTable: "Issuer",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__Invoice__payment__5FB337D6",
+                        name: "FK__Invoice__payment__31EC6D26",
                         column: x => x.paymentId,
                         principalSchema: "business",
                         principalTable: "Payments",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__Invoice__receive__5EBF139D",
+                        name: "FK__Invoice__receive__30F848ED",
                         column: x => x.receiverId,
                         principalSchema: "business",
                         principalTable: "Receiver",
@@ -201,9 +216,9 @@ namespace eInvoice.Models.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Usersdet__CBA1B257D818C674", x => x.userid);
+                    table.PrimaryKey("PK__Usersdet__CBA1B25706F63767", x => x.userid);
                     table.ForeignKey(
-                        name: "FK__Usersdeta__fullA__70DDC3D8",
+                        name: "FK__Usersdeta__fullA__4316F928",
                         column: x => x.userid,
                         principalSchema: "business",
                         principalTable: "Users",
@@ -242,7 +257,7 @@ namespace eInvoice.Models.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.productid);
                     table.ForeignKey(
-                        name: "FK__Products__invoic__66603565",
+                        name: "FK__Products__invoic__38996AB5",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
                         principalTable: "Invoice",
@@ -265,7 +280,7 @@ namespace eInvoice.Models.Migrations
                 {
                     table.PrimaryKey("PK_Signatures", x => x.id);
                     table.ForeignKey(
-                        name: "FK__Signature__invoi__693CA210",
+                        name: "FK__Signature__invoi__3B75D760",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
                         principalTable: "Invoice",
@@ -287,7 +302,7 @@ namespace eInvoice.Models.Migrations
                 {
                     table.PrimaryKey("PK_SubmittedDocs", x => x.id);
                     table.ForeignKey(
-                        name: "FK__Submitted__invoi__6383C8BA",
+                        name: "FK__Submitted__invoi__35BCFE0A",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
                         principalTable: "Invoice",
@@ -312,7 +327,7 @@ namespace eInvoice.Models.Migrations
                 {
                     table.PrimaryKey("PK_TaxTypes", x => x.id);
                     table.ForeignKey(
-                        name: "FK__TaxTypes__invoic__6C190EBB",
+                        name: "FK__TaxTypes__invoic__3E52440B",
                         column: x => x.invoiceInternalId,
                         principalSchema: "taxes",
                         principalTable: "Invoice",
@@ -371,6 +386,10 @@ namespace eInvoice.Models.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CodeTemplates",
+                schema: "business");
+
             migrationBuilder.DropTable(
                 name: "Products",
                 schema: "business");

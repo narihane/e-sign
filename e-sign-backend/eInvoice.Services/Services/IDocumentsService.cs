@@ -11,12 +11,6 @@ namespace eInvoice.Services.Services
 {
     public interface IDocumentsService
     {
-        void SaveInvoice(DocumentsContainer invoice);
-
-        Invoice GetLocalInvoice(string Id);
-
-        IEnumerable<Invoice> GetAllInvoices();
-
-        Task<SubmitDocumentsResponse> SubmitDocs(List<string> internalIds);
+       Task<SubmitDocumentsResponse> SubmitDocs(List<string> internalIds);
     }
 }

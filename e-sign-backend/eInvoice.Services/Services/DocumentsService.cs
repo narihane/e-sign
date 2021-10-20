@@ -16,56 +16,15 @@ namespace eInvoice.Services.Services
 {
     public class DocumentsService : IDocumentsService
     {
-        private readonly IGenericRepository<Invoice> genericRepo;
         private readonly IInvoiceRepository invoiceRepo;
         private readonly IMapper mapper;
         private readonly SystemApiHttpClient client;
 
-        public DocumentsService(IGenericRepository<Invoice> genericRepo, IInvoiceRepository invoiceRepo, IMapper mapper, SystemApiHttpClient client)
+        public DocumentsService(IInvoiceRepository invoiceRepo, IMapper mapper, SystemApiHttpClient client)
         {
-            this.genericRepo = genericRepo;
             this.invoiceRepo = invoiceRepo;
             this.mapper = mapper;
             this.client = client;
-        }
-
-        public IEnumerable<Invoice> GetAllInvoices()
-        {
-            var invoices = genericRepo.GetAll();
-
-            return invoices;
-        }
-
-        public Invoice GetLocalInvoice(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                throw new Exception("Invoice id missing!");
-            }
-
-            var invoice = invoiceRepo.Getinvoice(id);
-
-            if (invoice == null)
-            {
-                throw new Exception($"No invoice with internal id {id}");
-            }
-            return invoice;
-        }
-
-        public void SaveInvoice(DocumentsContainer document)
-        {
-            if (document == null || document.documents.Count == 0)
-            {
-                throw new Exception("No Invoice Added!");
-            }
-            foreach (var doc in document.documents)
-            {
-                ////var invoice = mapper.Map<Invoice>(document.documents);
-                var invoice = DocumentMapper.MapDocumentToInvoice(doc);
-
-                // perform Validation
-                genericRepo.Insert(invoice);
-            }
         }
 
         public async Task<SubmitDocumentsResponse> SubmitDocs(List<string> internalIds)

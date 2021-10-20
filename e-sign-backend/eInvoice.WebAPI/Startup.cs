@@ -62,6 +62,8 @@ namespace eInvoice.WebAPI
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITaxAuthorityService, TaxAuthorityServices>();
             services.AddScoped<IDocumentsService, DocumentsService>();
+            services.AddScoped<IInvoicesService, InvoicesService>();
+            services.AddScoped<IFilesService, FilesService>();
 
             services.AddHttpClient<IdentityServiceHttpClient>();
             services.AddHttpClient<SystemApiHttpClient>();

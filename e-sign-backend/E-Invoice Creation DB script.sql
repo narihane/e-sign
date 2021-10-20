@@ -1,7 +1,16 @@
---CREATE Database eInvoice;
+
+
+--CREATE DATABASE eInvoice 
+--ON
+--PRIMARY ( NAME = Arch1,
+--    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\einvoice.mdf'),
+--FILEGROUP FileStreamGroup1 CONTAINS FILESTREAM( NAME = Arch3,
+--    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\filestream1')
+--LOG ON  ( NAME = Archlog1,
+--    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\einvoice_log.ldf')
 --GO
 
------- create schemas
+-------- create schemas
 --CREATE SCHEMA taxes;
 --go
 
@@ -167,3 +176,10 @@ CREATE TABLE business.Usersdetails (
 	fullAddress VARCHAR (255) NOT NULL
 	FOREIGN KEY (userid) REFERENCES business.users (id) ON DELETE CASCADE ON UPDATE CASCADE,
 );
+
+--CREATE TABLE business.CodeTemplates (
+--	[Id] [uniqueidentifier] ROWGUIDCOL NOT NULL PRIMARY KEY,
+--	[FileName] nVARCHAR (255) NULL,
+--	[FileType] VARCHAR (255) NULL,
+--	[File] VARBINARY(MAX) FILESTREAM NULL,
+--);

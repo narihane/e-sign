@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using eInvoice.Models.DTOModel.Invoices;
+using eInvoice.Services.Services;
+using eInvoice.WebAPI.Helpers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +15,59 @@ namespace eInvoice.WebAPI.Controllers
     [ApiController]
     public class InvoicesController : ControllerBase
     {
+        private readonly IInvoicesService invoiceService;
+        private readonly ILogger logger;
 
+        public InvoicesController(IInvoicesService invoiceService, ILogger logger)
+        {
+            this.invoiceService = invoiceService;
+            this.logger = logger;
+        }
+
+        //[Authorize]
+        [HttpPost("save")]
+        public IActionResult SaveInvoice([FromBody] DocumentsContainer document)
+        {
+            try
+            {
+                invoiceService.SaveInvoice(document);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get/{Id}")]
+        public IActionResult GetInvoice(string Id)
+        {
+            try
+            {
+                var invoice = invoiceService.GetLocalInvoice(Id);
+                return Ok(invoice);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get")]
+        public IActionResult GetAllInvoices()
+        {
+            try
+            {
+                var invoice = invoiceService.GetAllInvoices();
+                return Ok(invoice);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
