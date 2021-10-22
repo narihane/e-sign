@@ -108,10 +108,5 @@
       }
     }
   },
-  "defaultProject": "e-sign-frontend",
-  "schematics": {
-    "@schematics/angular:component": {
-      "styleext": "scss"
-    }
-  }
+  "defaultProject": "e-sign-frontend"
 }

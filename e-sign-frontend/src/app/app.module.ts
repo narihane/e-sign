@@ -18,6 +18,7 @@ import {
 import {
   MatInputModule
 } from '@angular/material/input';
+import { TileComponent } from './shared/tile/tile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {
     LoginComponent,
     UserMainComponent,
     UserAddDetailsComponent,
-    AdminMainComponent
+    AdminMainComponent,
+    TileComponent
   ],
   imports: [
     MatFormFieldModule,

@@ -59,11 +59,19 @@ export class LoginComponent implements OnInit {
   get confirmPass() { return this.registerForm.get('confirmPassword'); }
 
 
-  onSubmit(): void {
+  onUserLogin(): void {
     // Process checkout data here
     console.log('Login', this.loginForm.value);
     // API for login access token
     this.router.navigate(['userMain'], {
+      queryParams:
+        { email: this.email, password: this.password }, skipLocationChange: true
+    });
+    this.loginForm.reset();
+  }
+
+  onAdminLogin():void{
+    this.router.navigate(['adminMain'], {
       queryParams:
         { email: this.email, password: this.password }, skipLocationChange: true
     });

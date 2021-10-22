@@ -1,1 +1,53 @@
-<p>admin-main works!</p>
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="100">
+  <div class="container">
+    <div class="navbar-translate">
+      <a class="navbar-brand" href="./"><span>E•Sign</span> System</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="example-navbar-primary">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="tim-icons icon-single-02"></i> Profile
+          </a>
+        </li>
+        <li class="dropdown nav-item">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+            <i class="tim-icons icon-settings-gear-63"></i> Settings
+          </a>
+          <div class="dropdown-menu dropdown-with-icons">
+            <a href="https://demos.creative-tim.com/blk-design-system/docs/1.0/getting-started/overview.html"
+              class="dropdown-item">
+              <i class="tim-icons icon-paper"></i> Add Mapping codes
+            </a>
+            <a href="examples/register-page.html" class="dropdown-item">
+              <i class="tim-icons icon-bullet-list-67"></i>Registered Users
+            </a>
+            <a href="examples/profile-page.html" class="dropdown-item">
+              <i class="tim-icons icon-single-02"></i>Sign out
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="page-header">
+    <div class="page-header-image"></div>
+    <div class="content">
+      <div class="container">
+        <div class="card-deck">
+          <app-tile title="Pending" [status]="pending"></app-tile>
+          <app-tile title="Submitted" [status]="submitted"></app-tile>
+          <app-tile title="Approved" [status]="approved"></app-tile>
+          <app-tile title="Rejected" [status]="rejected"></app-tile>
+      </div>
+    </div>
+  </div>
+</div>
