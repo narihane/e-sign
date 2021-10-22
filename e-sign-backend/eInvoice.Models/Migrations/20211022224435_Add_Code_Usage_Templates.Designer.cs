@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eInvoice.Models.Models;
 
 namespace eInvoice.Models.Migrations
 {
     [DbContext(typeof(eInvoiceContext))]
-    partial class eInvoiceContextModelSnapshot : ModelSnapshot
+    [Migration("20211022224435_Add_Code_Usage_Templates")]
+    partial class Add_Code_Usage_Templates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

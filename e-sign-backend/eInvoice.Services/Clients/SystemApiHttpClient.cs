@@ -43,5 +43,23 @@ namespace eInvoice.Services.Clients
             var submittedDoc = JsonConvert.DeserializeObject<SubmitDocumentsResponse>(content);
             return submittedDoc;
         }
+
+        public async Task CreateEGSCodeUsage(NewCodes codes)
+        {
+            var jsonContent = JsonConvert.SerializeObject(codes);
+            var response = await client.PostAsync("api/v1/codetypes/requests/codes", new StringContent(jsonContent, Encoding.UTF8, "application/json"));
+            var content = response.Content.ReadAsStringAsync().Result;
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(content);
+        }
+
+        public async Task RequestCodeReuse(ExistingCodes codes)
+        {
+            var jsonContent = JsonConvert.SerializeObject(codes);
+            var response = await client.PutAsync("api/v1/codetypes/requests/codeusages", new StringContent(jsonContent, Encoding.UTF8, "application/json"));
+            var content = response.Content.ReadAsStringAsync().Result;
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(content);
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace eInvoice.Services.Services
             return invoice;
         }
 
-        public void SaveInvoice(DocumentsContainer document)
+        public void SaveInvoices(DocumentsContainer document)
         {
             if (document == null || document.documents.Count == 0)
             {

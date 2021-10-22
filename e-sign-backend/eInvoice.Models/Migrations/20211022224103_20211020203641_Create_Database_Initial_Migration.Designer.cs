@@ -10,8 +10,8 @@ using eInvoice.Models.Models;
 namespace eInvoice.Models.Migrations
 {
     [DbContext(typeof(eInvoiceContext))]
-    [Migration("20211020203641_Create_Database_Initial_Migration")]
-    partial class Create_Database_Initial_Migration
+    [Migration("20211022224103_20211020203641_Create_Database_Initial_Migration")]
+    partial class _20211020203641_Create_Database_Initial_Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,9 +35,9 @@ namespace eInvoice.Models.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("FileType")
-                        .HasMaxLength(50)
+                        .HasMaxLength(255)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -201,13 +201,13 @@ namespace eInvoice.Models.Migrations
                     b.HasKey("InteranlId")
                         .HasName("PK__Invoice__1B0114ED61A5BE0B");
 
-                    b.HasIndex("DeliveryId");
+                    b.HasIndex(new[] { "DeliveryId" }, "IX_Invoice_deliveryId");
 
-                    b.HasIndex("IssuerId");
+                    b.HasIndex(new[] { "IssuerId" }, "IX_Invoice_issuerId");
 
-                    b.HasIndex("PaymentId");
+                    b.HasIndex(new[] { "PaymentId" }, "IX_Invoice_paymentId");
 
-                    b.HasIndex("ReceiverId");
+                    b.HasIndex(new[] { "ReceiverId" }, "IX_Invoice_receiverId");
 
                     b.ToTable("Invoice", "taxes");
                 });
@@ -456,7 +456,7 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Productid");
 
-                    b.HasIndex("InvoiceInternalId");
+                    b.HasIndex(new[] { "InvoiceInternalId" }, "IX_Products_invoiceInternalId");
 
                     b.ToTable("Products", "business");
                 });
@@ -581,7 +581,7 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvoiceInternalId");
+                    b.HasIndex(new[] { "InvoiceInternalId" }, "IX_Signatures_invoiceInternalId");
 
                     b.ToTable("Signatures", "business");
                 });
@@ -614,7 +614,7 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvoiceInternalId");
+                    b.HasIndex(new[] { "InvoiceInternalId" }, "IX_SubmittedDocs_invoiceInternalId");
 
                     b.ToTable("SubmittedDocs", "business");
                 });
@@ -656,7 +656,7 @@ namespace eInvoice.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvoiceInternalId");
+                    b.HasIndex(new[] { "InvoiceInternalId" }, "IX_TaxTypes_invoiceInternalId");
 
                     b.ToTable("TaxTypes", "taxes");
                 });

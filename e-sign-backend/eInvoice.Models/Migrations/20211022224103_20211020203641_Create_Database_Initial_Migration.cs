@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eInvoice.Models.Migrations
 {
-    public partial class Create_Database_Initial_Migration : Migration
+    public partial class _20211020203641_Create_Database_Initial_Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@ namespace eInvoice.Models.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FileName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    FileType = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 50, nullable: true),
+                    FileType = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: true),
                     File = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>

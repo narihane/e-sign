@@ -177,9 +177,24 @@ CREATE TABLE business.Usersdetails (
 	FOREIGN KEY (userid) REFERENCES business.users (id) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 
---CREATE TABLE business.CodeTemplates (
---	[Id] [uniqueidentifier] ROWGUIDCOL NOT NULL PRIMARY KEY,
---	[FileName] nVARCHAR (255) NULL,
---	[FileType] VARCHAR (255) NULL,
---	[File] VARBINARY(MAX) FILESTREAM NULL,
+CREATE TABLE business.CodeTemplates (
+	[Id] [uniqueidentifier] ROWGUIDCOL NOT NULL PRIMARY KEY,
+	[FileName] nVARCHAR (255) NULL,
+	[FileType] VARCHAR (255) NULL,
+	[File] VARBINARY(MAX) FILESTREAM NULL,
+);
+
+--CREATE TABLE business.Codes (
+--    id INT IDENTITY (1, 1) PRIMARY KEY,
+--	parentCode VARCHAR (255) NOT NULL,
+--	itemCode VARCHAR (255) NOT NULL,
+--	codeName VARCHAR (255) NOT NULL,
+--	codeNameAr VARCHAR (255) NOT NULL,
+--	activeFrom DATE NOT NULL,
+--	activeTo DATE NOT NULL,
+--	description VARCHAR (255) NOT NULL,
+--	descriptionAr VARCHAR (255) NOT NULL,
+--	requestReason VARCHAR (255) NOT NULL,
+--	linkedCode VARCHAR (255) NOT NULL,
 --);
+
