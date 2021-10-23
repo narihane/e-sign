@@ -19,6 +19,12 @@ import {
   MatInputModule
 } from '@angular/material/input';
 import { TileComponent } from './shared/tile/tile.component';
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { AuthGuard } from './shared/_guards/authGuard';
+import { AuthenticationService } from './shared/_services/authentication.service';
+import { UserService } from './shared/_services/user.service';
+import { JwtInterceptor } from './shared/_helpers/jwt.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,8 @@ import { TileComponent } from './shared/tile/tile.component';
     UserMainComponent,
     UserAddDetailsComponent,
     AdminMainComponent,
-    TileComponent
+    TileComponent,
+    InvoiceDetailsComponent
   ],
   imports: [
     MatFormFieldModule,
@@ -41,7 +48,16 @@ import { TileComponent } from './shared/tile/tile.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' },
+  AuthGuard,
+  AuthenticationService,
+  UserService,
+  {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

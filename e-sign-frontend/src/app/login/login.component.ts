@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons }
   from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from '../shared/_services/authentication.service';
+import { UserService } from '../shared/_services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +16,8 @@ export class LoginComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   closeResult = '';
   modalReference: any;
+  loading = false;
+  returnUrl: string = '';
   loginForm = new FormGroup({
     email: new FormControl('', [
       Validators.required
@@ -22,6 +26,7 @@ export class LoginComponent implements OnInit {
       Validators.required
     ])
   });
+
 
   checkPasswords: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
     let pass = group.get('password')?.value;
@@ -44,13 +49,23 @@ export class LoginComponent implements OnInit {
     ]),
   }, { validators: this.checkPasswords });
 
-  constructor(private modalService: NgbModal, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private modalService: NgbModal, private route: ActivatedRoute,
+    private router: Router, private formBuilder: FormBuilder,
+    // private authenticationService: AuthenticationService,
+    // private userService: UserService
+    ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // reset login status
+    // this.authenticationService.logout();
+
+    // get return url from route parameters or default to '/'
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
 
   //Login
-  get email() { return this.loginForm.get('email'); }
-  get password() { return this.loginForm.get('password'); }
+  get email() { return this.loginForm.get('email')?.value; }
+  get password() { return this.loginForm.get('password')?.value; }
 
   //Register
   get name() { return this.registerForm.get('name'); }
@@ -70,7 +85,33 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
   }
 
-  onAdminLogin():void{
+  // register() {
+  //   this.loading = true;
+  //   this.userService.create()
+  //     .subscribe(
+  //       data => {
+  //         this.router.navigate(['login']);
+  //       },
+  //       error => {
+  //         this.loading = false;
+  //       });
+  // }
+
+  /*login() {
+    this.loading = true;
+    this.authenticationService.login(this.email, this.password)
+      .subscribe(
+        data => {
+          // login successful so redirect to return url
+          this.router.navigateByUrl(this.returnUrl);
+        },
+        error => {
+          // login failed so display error
+          this.loading = false;
+        });
+  }*/
+
+  onAdminLogin(): void {
     this.router.navigate(['adminMain'], {
       queryParams:
         { email: this.email, password: this.password }, skipLocationChange: true

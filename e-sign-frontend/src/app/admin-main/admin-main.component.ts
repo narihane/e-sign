@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InvoiceStatus } from '../shared/app.model';
+import { InvoiceStatus } from '../shared/_models/app.model';
 
 @Component({
   selector: 'app-admin-main',

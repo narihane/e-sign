@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { InvoiceStatus } from '../app.model';
+import { InvoiceStatus } from '../_models/app.model';
 
 @Component({
   selector: 'app-tile',
@@ -17,6 +17,7 @@ export class TileComponent implements OnInit {
   }
 
   onButtonSubmit(){
+    console.log("here")
     this.router.navigate(['invoiceDetails'], {
       queryParams:
         { status: this.status}, skipLocationChange: true

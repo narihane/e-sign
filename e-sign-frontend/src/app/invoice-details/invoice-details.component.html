@@ -1,7 +1,15 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="100">
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent ">
   <div class="container">
     <div class="navbar-translate">
-      <a class="navbar-brand" href="./"><span>E•Sign</span> System</a>
+      <!-- <a class="navbar-brand" href="./"><span>E•Sign</span> System</a> -->
+      <!-- <nav aria-label="breadcrumb" role="navigation"> -->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item navbar-brand"><a><span>E•Sign</span> System</a></li>
+        <li class="breadcrumb-item navbar-brand"><a routerLink="/adminMain" routerLinkActive="active">Admin Main</a>
+        </li>
+        <li class="breadcrumb-item navbar-brand active" aria-current="page">{{status}}</li>
+      </ol>
+      <!-- </nav> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-bar bar1"></span>
@@ -28,7 +36,7 @@
             <a href="examples/register-page.html" class="dropdown-item">
               <i class="tim-icons icon-bullet-list-67"></i>Registered Users
             </a>
-            <a [routerLink]="['/']" class="dropdown-item">
+            <a href="examples/profile-page.html" class="dropdown-item">
               <i class="tim-icons icon-single-02"></i>Sign out
             </a>
           </div>
@@ -37,16 +45,41 @@
     </div>
   </div>
 </nav>
+
 <div class="wrapper">
   <div class="page-header">
     <div class="page-header-image"></div>
     <div class="content">
       <div class="container">
-        <div class="card-deck">
-          <app-tile title="Pending" [status]="pending"></app-tile>
-          <app-tile title="Submitted" [status]="submitted"></app-tile>
-          <app-tile title="Approved" [status]="approved"></app-tile>
-          <app-tile title="Rejected" [status]="rejected"></app-tile>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th>Name</th>
+              <th>Job Position</th>
+              <th>Since</th>
+              <th class="text-right">Salary</th>
+              <th class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center">1</td>
+              <td>John Doe</td>
+              <td>Design</td>
+              <td>2012</td>
+              <td class="text-right">&euro; 89,241</td>
+              <td class="td-actions text-right">
+                <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-round btn-icon">
+                  <i class="tim-icons icon-pencil"></i>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon">
+                  <i class="tim-icons icon-simple-remove"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
