@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eInvoice.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace eInvoice.Models.DTOModel
 
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public UserRole UserRole { get; set; }
 
         public string FirstName { get; set; }
 

@@ -4,6 +4,7 @@ using eInvoice.Services.Services;
 using eInvoice.WebAPI.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -26,6 +27,7 @@ namespace eInvoice.WebAPI.Controllers
             this.logger = logger;
         }
 
+        [Authorize]
         [HttpPost("submit")]
         public async Task<IActionResult> SubmitDocuments([FromBody] List<string> internalIds)
         {
@@ -37,7 +39,11 @@ namespace eInvoice.WebAPI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
-                return BadRequest();
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
+                return BadRequest(ex.Message);
             }
         }
     }

@@ -1,7 +1,9 @@
 ﻿using eInvoice.Services.Services;
+using eInvoice.WebAPI.Helpers;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -26,6 +28,7 @@ namespace eInvoice.WebAPI.Controllers
             this.logger = logger;
         }
 
+        [Authorize]
         [HttpPost("new/request")]
         public async Task<IActionResult> UploadNewCodeUsageBulk()
         {
@@ -38,10 +41,15 @@ namespace eInvoice.WebAPI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
                 return BadRequest(ex.Message);
             }
         }
 
+        [Authorize]
         [HttpPut("reuse/request")]
         public async Task<IActionResult> UploadExistingCodeUsageBulk()
         {
@@ -54,6 +62,32 @@ namespace eInvoice.WebAPI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchCodes(string codeName, int pageSize = 20, int pageNumber = 1)
+        {
+            try
+            {
+                var authorizationHeader = HttpContext.Request.Headers[HeaderNames.Authorization];
+
+                var result = await codesService.Search(codeName, pageSize, pageNumber);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
                 return BadRequest(ex.Message);
             }
         }

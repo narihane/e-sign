@@ -53,9 +53,9 @@ namespace eInvoice.Services.Services
 
             var userObject = new User
             {
-                Password = model.Password,
-                Role = UserRole.user.ToString(),
                 Username = model.UserName,
+                Password = model.Password,
+                Role = model.UserRole.ToString(),
                 Usersdetail = new Usersdetail
                 {
                     FirstName = model.FirstName,
@@ -81,6 +81,11 @@ namespace eInvoice.Services.Services
         public User GetById(int id)
         {
             return genericRepo.GetById(id);
+        }
+
+        public User GetByUsername(string username)
+        {
+            return userRepo.GetByUsername(username);
         }
 
         private string generateJwtToken(User user)

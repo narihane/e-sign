@@ -11,9 +11,13 @@ namespace eInvoice.Services.Services
     public interface IUserService
     {
         AuthResponseModel LogIn(AuthRequestModel model);
+
         void Register(UserRegisterationModel model);
+
         IEnumerable<User> GetAll();
+
         User GetById(int id);
 
+        User GetByUsername(string username);
     }
 }

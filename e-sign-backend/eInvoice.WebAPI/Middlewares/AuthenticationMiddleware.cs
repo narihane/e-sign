@@ -1,4 +1,6 @@
 ﻿using eInvoice.Models.AppSettings;
+using eInvoice.Models.Enums;
+using eInvoice.Models.Models;
 using eInvoice.Services.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -16,11 +18,13 @@ namespace eInvoice.WebAPI.Middlewares
     {
         private readonly RequestDelegate next;
         private readonly Jwt jwtSettings;
+        private readonly Apis apiSettings;
 
-        public AuthenticationMiddleware(RequestDelegate next, IOptions<Jwt> jwtSettings)
+        public AuthenticationMiddleware(RequestDelegate next, IOptions<Jwt> jwtSettings, IOptions<Apis> apiSettings)
         {
             this.next = next;
             this.jwtSettings = jwtSettings.Value;
+            this.apiSettings = apiSettings.Value;
         }
 
         public async Task Invoke(HttpContext context, IUserService userService)
@@ -57,8 +61,18 @@ namespace eInvoice.WebAPI.Middlewares
             }
             catch
             {
-                // do nothing if jwt validation fails
-                // user is not attached to context so request won't have access to secure routes
+                // check for token issuer if jwt validation fails
+                var securityToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
+                var issClaim = securityToken.Claims.First(c => c.Type == "iss").Value;
+                var clientId = securityToken.Claims.First(c => c.Type == "client_id").Value;
+                if (issClaim.Equals("https://id.eta.gov.eg", StringComparison.OrdinalIgnoreCase) && clientId.Equals(apiSettings.ClientId, StringComparison.OrdinalIgnoreCase))
+                {
+                    context.Items["User"] = new User
+                    {
+                        Username = clientId,
+                        Role = UserRole.Admin.ToString()
+                    };
+                }
             }
         }
     }

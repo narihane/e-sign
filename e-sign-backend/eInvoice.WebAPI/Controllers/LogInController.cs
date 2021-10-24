@@ -72,7 +72,11 @@ namespace eInvoice.WebAPI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
-                return BadRequest();
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
+                return BadRequest(ex.Message);
             }
             
         }

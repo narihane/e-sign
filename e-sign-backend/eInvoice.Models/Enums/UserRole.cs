@@ -9,6 +9,6 @@ namespace eInvoice.Models.Enums
     public enum UserRole
     {
         Admin = 0,
-        user = 1
+        User = 1
     }
 }

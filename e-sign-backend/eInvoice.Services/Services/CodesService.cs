@@ -1,4 +1,5 @@
 ﻿using eInvoice.Models.DTOModel.Invoices;
+using eInvoice.Models.DTOModel.Responses;
 using eInvoice.Models.Models;
 using eInvoice.Services.Clients;
 using eInvoice.Services.Helpers;
@@ -63,6 +64,12 @@ namespace eInvoice.Services.Services
                 items = codesList
             };
             await client.RequestCodeReuse(codes);
+        }
+
+        public async Task<SearchCodesResponse> Search(string codeName, int pageSize, int pageNumber)
+        {
+            var codes = await client.SearchCodes(codeName, pageSize, pageNumber);
+            return codes;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using eInvoice.Models.DTOModel.Responses;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,5 +13,6 @@ namespace eInvoice.Services.Services
     {
         Task SubmitNewCodes(IFormFile file);
         Task RequestCodeReuse(IFormFile file);
+        Task<SearchCodesResponse> Search(string codeName, int pageSize, int pageNumber);
     }
 }

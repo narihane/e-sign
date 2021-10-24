@@ -24,7 +24,7 @@ namespace eInvoice.WebAPI.Controllers
             this.logger = logger;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost("save")]
         public IActionResult SaveInvoices([FromBody] DocumentsContainer document)
         {
@@ -36,10 +36,15 @@ namespace eInvoice.WebAPI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
                 return BadRequest(ex.Message);
             }
         }
 
+        [Authorize]
         [HttpGet("get/{Id}")]
         public IActionResult GetInvoice(string Id)
         {
@@ -51,10 +56,15 @@ namespace eInvoice.WebAPI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
                 return BadRequest(ex.Message);
             }
         }
 
+        [Authorize]
         [HttpGet("get")]
         public IActionResult GetAllInvoices()
         {
@@ -66,6 +76,10 @@ namespace eInvoice.WebAPI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
                 return BadRequest(ex.Message);
             }
         }

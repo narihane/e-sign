@@ -16,6 +16,11 @@ namespace eInvoice.Services.Repositories
             this.dbcontext = dbcontext;
         }
 
+        public User GetByUsername(string username)
+        {
+            return dbcontext.Set<User>().Where(x => x.Username == username).FirstOrDefault();
+        }
+
         public User GetUser(string username, string password)
         {
             return dbcontext.Set<User>().Where(x => x.Username == username && x.Password == password).FirstOrDefault();
