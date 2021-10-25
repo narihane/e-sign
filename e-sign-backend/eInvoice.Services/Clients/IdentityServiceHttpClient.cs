@@ -25,7 +25,7 @@ namespace eInvoice.Services.Clients
             this.apisSettings = apisSettings.Value;
         }
 
-        public async Task<GetTokenResponse> GetToken()
+        public async Task<string> GetToken()
         {
             var formParams = new Dictionary<string, string>();
             formParams.Add("grant_type", "client_credentials");
@@ -37,7 +37,7 @@ namespace eInvoice.Services.Clients
             if (!response.IsSuccessStatusCode)
                 throw new Exception(content);
             var tokenResponse = JsonConvert.DeserializeObject<GetTokenResponse>(content);
-            return tokenResponse;
+            return tokenResponse.Token;
         }
     }
 }

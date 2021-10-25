@@ -44,20 +44,26 @@ namespace eInvoice.Services.Services
             return invoice;
         }
 
-        public void SaveInvoices(DocumentsContainer document)
+        public string SaveInvoice(DocumentsContainer document)
         {
             if (document == null || document.documents.Count == 0)
             {
                 throw new Exception("No Invoice Added!");
             }
-            foreach (var doc in document.documents)
+            var doc = document.documents.First();
+            if (string.IsNullOrWhiteSpace(doc.internalId))
             {
-                ////var invoice = mapper.Map<Invoice>(document.documents);
-                var invoice = DocumentMapper.MapDocumentToInvoice(doc);
-
-                // perform Validation
-                genericRepo.Insert(invoice);
+                doc.internalId = Guid.NewGuid().ToString();
             }
+
+            ////var invoice = mapper.Map<Invoice>(document.documents);
+            var invoice = DocumentMapper.MapDocumentToInvoice(doc);
+
+            // perform Validation
+
+            genericRepo.Insert(invoice);
+            return invoice.InteranlId;
+
         }
     }
 }

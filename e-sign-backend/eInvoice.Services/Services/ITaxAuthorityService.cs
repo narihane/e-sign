@@ -10,6 +10,6 @@ namespace eInvoice.Services.Services
 {
     public interface ITaxAuthorityService
     {
-        Task<GetTokenResponse> GetToken();
+        //Task<GetTokenResponse> GetToken();
     }
 }

@@ -2,6 +2,7 @@
 using eInvoice.Models.DTOModel;
 using eInvoice.Models.Enums;
 using eInvoice.Models.Models;
+using eInvoice.Services.Clients;
 using eInvoice.Services.Repositories;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -18,17 +19,19 @@ namespace eInvoice.Services.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepo;
+        private readonly IdentityServiceHttpClient httpClient;
         private readonly IGenericRepository<User> genericRepo;
         private readonly Jwt jwtSettings;
 
-        public UserService(IUserRepository userRepo, IGenericRepository<User> genericRepo, IOptions<Jwt> jwtSettings)
+        public UserService(IUserRepository userRepo, IGenericRepository<User> genericRepo, IOptions<Jwt> jwtSettings, IdentityServiceHttpClient httpClient)
         {
             this.userRepo = userRepo;
             this.jwtSettings = jwtSettings.Value;
             this.genericRepo = genericRepo;
+            this.httpClient = httpClient;
         }
 
-        public AuthResponseModel LogIn(AuthRequestModel model)
+        public async Task<string> LogIn(AuthRequestModel model)
         {
             var user = userRepo.GetUser(model.UserName, model.Password);
 
@@ -36,9 +39,13 @@ namespace eInvoice.Services.Services
             if (user == null) return null;
 
             // authentication successful so generate jwt token
-            var token = generateJwtToken(user);
-
-            return new AuthResponseModel(user, token);
+            if (user.Role == UserRole.User.ToString())
+            {
+                var token = generateJwtToken(user);
+                return token;
+            }
+            var taxPayerToken = await httpClient.GetToken();
+            return taxPayerToken;
         }
 
         public void Register(UserRegisterationModel model)

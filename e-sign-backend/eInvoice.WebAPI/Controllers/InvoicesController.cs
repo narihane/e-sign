@@ -26,12 +26,12 @@ namespace eInvoice.WebAPI.Controllers
 
         [Authorize]
         [HttpPost("save")]
-        public IActionResult SaveInvoices([FromBody] DocumentsContainer document)
+        public IActionResult SaveInvoice([FromBody] DocumentsContainer document)
         {
             try
             {
-                invoiceService.SaveInvoices(document);
-                return Ok();
+                var invoiceId = invoiceService.SaveInvoice(document);
+                return Ok(invoiceId);
             }
             catch (Exception ex)
             {
@@ -43,6 +43,7 @@ namespace eInvoice.WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
         [Authorize]
         [HttpGet("get/{Id}")]

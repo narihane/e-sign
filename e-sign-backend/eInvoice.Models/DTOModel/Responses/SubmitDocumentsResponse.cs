@@ -26,15 +26,6 @@ namespace eInvoice.Models.DTOModel.Responses
         public Error error { get; set; }
     }
 
-    public class Detail
-    {
-        public object code { get; set; }
-        public string message { get; set; }
-        public string target { get; set; }
-        public object propertyPath { get; set; }
-        public object details { get; set; }
-    }
-
     public class Error
     {
         public object code { get; set; }
@@ -42,5 +33,14 @@ namespace eInvoice.Models.DTOModel.Responses
         public string target { get; set; }
         public object propertyPath { get; set; }
         public List<Detail> details { get; set; }
+    }
+
+    public class Detail
+    {
+        public object code { get; set; }
+        public string message { get; set; }
+        public string target { get; set; }
+        public object propertyPath { get; set; }
+        public object details { get; set; }
     }
 }

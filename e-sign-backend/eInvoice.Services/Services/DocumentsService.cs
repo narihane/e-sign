@@ -48,5 +48,11 @@ namespace eInvoice.Services.Services
             var submittedDocs = await client.SubmitDocuments(docs);
             return submittedDocs;
         }
+
+        public async Task<GetRecentDocumentsResponse> GetDocuments(int pageSize, int pageNumber)
+        {
+            var docs = await client.GetDocuments(pageSize, pageNumber);
+            return docs;
+        }
     }
 }

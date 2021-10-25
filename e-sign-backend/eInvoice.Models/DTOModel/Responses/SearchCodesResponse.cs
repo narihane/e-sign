@@ -9,7 +9,7 @@ namespace eInvoice.Models.DTOModel.Responses
     public class SearchCodesResponse
     {
         public List<Result> result { get; set; }
-        public Metadata metadata { get; set; }
+        public PaginationData metadata { get; set; }
     }
 
     public class OwnerTaxpayer
@@ -88,11 +88,5 @@ namespace eInvoice.Models.DTOModel.Responses
         public OwnerTaxpayer ownerTaxpayer { get; set; }
         public RequesterTaxpayer requesterTaxpayer { get; set; }
         public CodeCategorization codeCategorization { get; set; }
-    }
-
-    public class Metadata
-    {
-        public int totalPages { get; set; }
-        public int totalCount { get; set; }
     }
 }

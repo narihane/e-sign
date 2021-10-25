@@ -72,12 +72,10 @@ namespace eInvoice.WebAPI.Controllers
 
         [Authorize]
         [HttpGet("search")]
-        public async Task<IActionResult> SearchCodes(string codeName, int pageSize = 20, int pageNumber = 1)
+        public async Task<IActionResult> SearchCodes(string codeName, int pageSize = 10, int pageNumber = 1)
         {
             try
             {
-                var authorizationHeader = HttpContext.Request.Headers[HeaderNames.Authorization];
-
                 var result = await codesService.Search(codeName, pageSize, pageNumber);
                 return Ok(result);
             }

@@ -12,5 +12,6 @@ namespace eInvoice.Services.Services
     public interface IDocumentsService
     {
        Task<SubmitDocumentsResponse> SubmitDocs(List<string> internalIds);
+       Task<GetRecentDocumentsResponse> GetDocuments(int pageSize, int pageNumber);
     }
 }

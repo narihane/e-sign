@@ -46,5 +46,25 @@ namespace eInvoice.WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize]
+        [HttpGet("get")]
+        public async Task<IActionResult> GetDocuments(int pageSize = 10, int pageNumber = 1)
+        {
+            try
+            {
+                var response = await documentsService.GetDocuments(pageSize, pageNumber);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -25,13 +25,13 @@ namespace eInvoice.WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult LogIn(AuthRequestModel model)
+        public async Task<IActionResult> LogIn(AuthRequestModel model)
         {
             try
             {
-                var response = userService.LogIn(model);
+                var response = await userService.LogIn(model);
 
-                if (response == null)
+                if (string.IsNullOrWhiteSpace(response))
                     return BadRequest(new { message = "Username or password is incorrect" });
 
                 return Ok(response);
@@ -56,7 +56,7 @@ namespace eInvoice.WebAPI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
-                return Unauthorized();
+                return BadRequest();
             }
         }
 
@@ -78,22 +78,23 @@ namespace eInvoice.WebAPI.Controllers
                 }
                 return BadRequest(ex.Message);
             }
-            
+
         }
 
 
-        [HttpGet("TaxPayer/Login")]
-        public async Task<IActionResult> GetToken()
-        {
-            try
-            {
-                var response = await taxAuthorityService.GetToken();
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpGet("TaxPayer/Login")]
+        //public async Task<IActionResult> GetToken(AuthRequestModel model)
+        //{
+        //    try
+        //    {
+        //        var user = userService.LogIn(model);
+        //        var response = await taxAuthorityService.GetToken();
+        //        return Ok(response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

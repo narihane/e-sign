@@ -18,10 +18,11 @@ namespace eInvoice.Services.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<GetTokenResponse> GetToken()
-        {
-            var tokenResponse = await httpClient.GetToken();
-            return tokenResponse;
-        }
+        //public async Task<GetTokenResponse> GetToken()
+        //{
+
+        //    var tokenResponse = await httpClient.GetToken();
+        //    return tokenResponse;
+        //}
     }
 }

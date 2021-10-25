@@ -24,6 +24,7 @@ namespace eInvoice.Services.Clients
         public SystemApiHttpClient(HttpClient client, IOptions<Apis> apisSettings, IHttpContextAccessor context)
         {
             client.BaseAddress = new Uri(apisSettings.Value.SystemApi);
+            client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", context.HttpContext.Request.Headers[HeaderNames.Authorization].FirstOrDefault().ToString());
             client.DefaultRequestHeaders.Add("accept", "application/json");
             this.client = client;
@@ -49,6 +50,24 @@ namespace eInvoice.Services.Clients
             }
             var submittedDoc = JsonConvert.DeserializeObject<SubmitDocumentsResponse>(content);
             return submittedDoc;
+        }
+
+        public async Task<GetRecentDocumentsResponse> GetDocuments(int pageSize, int pageNumber)
+        {
+            client.DefaultRequestHeaders.Add("PageSize", $"{pageSize}");
+            client.DefaultRequestHeaders.Add("PageNo", $"{pageNumber}");
+            var response = await client.GetAsync($"api/v1/documents/recent");
+            if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode == HttpStatusCode.Forbidden)
+            {
+                throw new UnauthorizedAccessException(response.ReasonPhrase);
+            }
+            var content = response.Content.ReadAsStringAsync().Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(content);
+            }
+            var documents = JsonConvert.DeserializeObject<GetRecentDocumentsResponse>(content);
+            return documents;
         }
 
         public async Task CreateEGSCodeUsage(NewCodes codes)
@@ -96,6 +115,23 @@ namespace eInvoice.Services.Clients
             }
             var codes = JsonConvert.DeserializeObject<SearchCodesResponse>(content);
             return codes;
+        }
+
+        public async Task<GetNotificationsResponse> GetNotifications(DateTime? dateFrom, DateTime? dateTo, string? type, string? status, string? channel, int pageSize, int pageNumber)
+        {
+            var queryString = $"?pageSize={pageSize}&pageNo={pageNumber}&dateFrom={dateFrom}&dateTo={dateTo}&type={type}&status={status}&channel={channel}";
+            var response = await client.GetAsync($"api/v1/notifications/taxpayer{queryString}");
+            if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode == HttpStatusCode.Forbidden)
+            {
+                throw new UnauthorizedAccessException(response.ReasonPhrase);
+            }
+            var content = response.Content.ReadAsStringAsync().Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(content);
+            }
+            var notifications = JsonConvert.DeserializeObject<GetNotificationsResponse>(content);
+            return notifications;
         }
     }
 }

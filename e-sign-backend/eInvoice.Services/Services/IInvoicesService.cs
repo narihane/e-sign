@@ -14,6 +14,6 @@ namespace eInvoice.Services.Services
 
         Invoice GetLocalInvoice(string Id);
 
-        void SaveInvoices(DocumentsContainer invoice);
+        string SaveInvoice(DocumentsContainer invoice);
     }
 }
