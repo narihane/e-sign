@@ -65,7 +65,7 @@ namespace eInvoice.WebAPI.Middlewares
                 var securityToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
                 var issClaim = securityToken.Claims.First(c => c.Type == "iss").Value;
                 var clientId = securityToken.Claims.First(c => c.Type == "client_id").Value;
-                if (issClaim.Equals("https://id.eta.gov.eg", StringComparison.OrdinalIgnoreCase) && clientId.Equals(apiSettings.ClientId, StringComparison.OrdinalIgnoreCase))
+                if (issClaim.Equals(apiSettings.IdentityService, StringComparison.OrdinalIgnoreCase) && clientId.Equals(apiSettings.ClientId, StringComparison.OrdinalIgnoreCase))
                 {
                     context.Items["User"] = new User
                     {

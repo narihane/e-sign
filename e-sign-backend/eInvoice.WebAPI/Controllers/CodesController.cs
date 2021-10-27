@@ -35,8 +35,8 @@ namespace eInvoice.WebAPI.Controllers
             try
             {
                 var file = Request.Form.Files.FirstOrDefault();
-                await codesService.SubmitNewCodes(file);
-                return Ok();
+                var response = await codesService.SubmitNewCodes(file);
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -56,8 +56,8 @@ namespace eInvoice.WebAPI.Controllers
             try
             {
                 var file = Request.Form.Files.FirstOrDefault();
-                await codesService.RequestCodeReuse(file);
-                return Ok();
+                var response = await codesService.RequestCodeReuse(file);
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -71,12 +71,32 @@ namespace eInvoice.WebAPI.Controllers
         }
 
         [Authorize]
-        [HttpGet("search")]
-        public async Task<IActionResult> SearchCodes(string codeName, int pageSize = 10, int pageNumber = 1)
+        [HttpGet("search/usages")]
+        public async Task<IActionResult> SearchRegisteredCodes(string codeName, int pageSize = 10, int pageNumber = 1)
         {
             try
             {
                 var result = await codesService.Search(codeName, pageSize, pageNumber);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+                if (ex.GetType().Name == "UnauthorizedAccessException")
+                {
+                    return Unauthorized();
+                }
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("search/published")]
+        public async Task<IActionResult> SearchPublishedCodes(int? codeLookupValue, string codeName, int pageSize = 10, int pageNumber = 1)
+        {
+            try
+            {
+                var result = await codesService.SearchPublishedCodes(codeLookupValue, codeName, pageSize, pageNumber);
                 return Ok(result);
             }
             catch (Exception ex)

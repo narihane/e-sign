@@ -32,7 +32,7 @@ namespace eInvoice.Services.Clients
             formParams.Add("client_id", apisSettings.ClientId);
             formParams.Add("client_secret", apisSettings.ClientSecret);
 
-            var response = await client.PostAsync("connect/token", new FormUrlEncodedContent(formParams));
+            var response = await client.PostAsync("/connect/token", new FormUrlEncodedContent(formParams));
             var content = response.Content.ReadAsStringAsync().Result;
             if (!response.IsSuccessStatusCode)
                 throw new Exception(content);

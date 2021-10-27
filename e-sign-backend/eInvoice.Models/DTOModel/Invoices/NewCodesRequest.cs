@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eInvoice.Models.DTOModel.Invoices
 {
-    public class NewCodes
+    public class NewCodesRequest
     {
         public List<NewCodeItems> items { get; set; }
     }
@@ -19,9 +19,10 @@ namespace eInvoice.Models.DTOModel.Invoices
         public string codeName { get; set; }
         public string codeNameAr { get; set; }
         public DateTime activeFrom { get; set; }
-        public DateTime activeTo { get; set; }
+        public DateTime? activeTo { get; set; }
         public string description { get; set; }
         public string descriptionAr { get; set; }
         public string requestReason { get; set; }
+        public string linkedCode { get; set; }
     }
 }

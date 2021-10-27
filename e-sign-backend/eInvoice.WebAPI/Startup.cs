@@ -51,6 +51,7 @@ namespace eInvoice.WebAPI
             services.AddSingleton(Log.Logger);
 
             services.AddDbContext<eInvoiceContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
+
             services.AddAutoMapper(typeof(DocumentProfile));
             
             services.AddHttpContextAccessor();

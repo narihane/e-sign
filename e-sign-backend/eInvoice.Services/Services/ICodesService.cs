@@ -11,8 +11,9 @@ namespace eInvoice.Services.Services
 {
     public interface ICodesService
     {
-        Task SubmitNewCodes(IFormFile file);
-        Task RequestCodeReuse(IFormFile file);
+        Task<string> SubmitNewCodes(IFormFile file);
+        Task<string> RequestCodeReuse(IFormFile file);
         Task<SearchCodesResponse> Search(string codeName, int pageSize, int pageNumber);
+        Task<SearchCodesResponse> SearchPublishedCodes(int? codeLookupValue, string codeName, int pageSize = 10, int pageNumber = 1);
     }
 }

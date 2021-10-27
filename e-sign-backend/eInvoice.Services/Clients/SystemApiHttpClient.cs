@@ -70,7 +70,7 @@ namespace eInvoice.Services.Clients
             return documents;
         }
 
-        public async Task CreateEGSCodeUsage(NewCodes codes)
+        public async Task<string> CreateEGSCodeUsage(NewCodesRequest codes)
         {
             var jsonContent = JsonConvert.SerializeObject(codes);
             var response = await client.PostAsync("api/v1/codetypes/requests/codes", new StringContent(jsonContent, Encoding.UTF8, "application/json"));
@@ -83,9 +83,10 @@ namespace eInvoice.Services.Clients
             {
                 throw new Exception(content);
             }
+            return content;
         }
 
-        public async Task RequestCodeReuse(ExistingCodes codes)
+        public async Task<string> RequestCodeReuse(ExistingCodes codes)
         {
             var jsonContent = JsonConvert.SerializeObject(codes);
             var response = await client.PutAsync("api/v1/codetypes/requests/codeusages", new StringContent(jsonContent, Encoding.UTF8, "application/json"));
@@ -98,12 +99,38 @@ namespace eInvoice.Services.Clients
             {
                 throw new Exception(content);
             }
+            return content;
         }
 
         public async Task<SearchCodesResponse> SearchCodes(string codeName, int pageSize, int pageNumber)
         {
             var queryString = $"?CodeName={codeName}&PageSize={pageSize}&PageNumber={pageNumber}";
             var response = await client.GetAsync($"api/v1/codetypes/requests/my{queryString}");
+            if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode == HttpStatusCode.Forbidden)
+            {
+                throw new UnauthorizedAccessException(response.ReasonPhrase);
+            }
+            var content = response.Content.ReadAsStringAsync().Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(content);
+            }
+            var codes = JsonConvert.DeserializeObject<SearchCodesResponse>(content);
+            return codes;
+        }
+
+        public async Task<SearchCodesResponse> SearchPublishedCodes(int? codeLookupValue, string codeName, int pageSize, int pageNumber)
+        {
+            var queryString = $"?Ps={pageSize}&Pn={pageNumber}";
+            if (codeLookupValue.HasValue)
+            {
+                queryString += $"&CodeLookupValue={codeLookupValue}";
+            }
+            if (!string.IsNullOrWhiteSpace(codeName))
+            {
+                queryString += $"&CodeName={codeName}";
+            }
+            var response = await client.GetAsync($"api/v1/codetypes/GS1/codes{queryString}");
             if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode == HttpStatusCode.Forbidden)
             {
                 throw new UnauthorizedAccessException(response.ReasonPhrase);

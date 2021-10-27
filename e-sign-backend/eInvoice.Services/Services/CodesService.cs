@@ -1,4 +1,5 @@
-﻿using eInvoice.Models.DTOModel.Invoices;
+﻿using AutoMapper;
+using eInvoice.Models.DTOModel.Invoices;
 using eInvoice.Models.DTOModel.Responses;
 using eInvoice.Models.Models;
 using eInvoice.Services.Clients;
@@ -20,13 +21,15 @@ namespace eInvoice.Services.Services
     public class CodesService : ICodesService
     {
         private readonly SystemApiHttpClient client;
+        private readonly IMapper mapper;
 
-        public CodesService(SystemApiHttpClient client)
+        public CodesService(SystemApiHttpClient client, IMapper mapper)
         {
             this.client = client;
+            this.mapper = mapper;
         }
 
-        public async Task SubmitNewCodes(IFormFile file)
+        public async Task<string> SubmitNewCodes(IFormFile file)
         {
             if (file == null)
             {
@@ -38,15 +41,17 @@ namespace eInvoice.Services.Services
             var fileBytes = memoryStream.ToArray();
             var data = ExcelReader.ReadCodesFromFile(fileBytes);
             var jsonString = JsonConvert.SerializeObject(data);
-            var codesList = JsonConvert.DeserializeObject<List<NewCodeItems>>(jsonString);
-            NewCodes codes = new NewCodes
+            var codesList = JsonConvert.DeserializeObject<List<NewCodeItemsDTO>>(jsonString);
+            var mappedCodes = mapper.Map<List<NewCodeItemsDTO>, List<NewCodeItems>>(codesList);
+            NewCodesRequest codes = new NewCodesRequest
             {
-                items = codesList
+                items = mappedCodes
             };
-            await client.CreateEGSCodeUsage(codes);
+            var response = await client.CreateEGSCodeUsage(codes);
+            return response;
         }
 
-        public async Task RequestCodeReuse(IFormFile file)
+        public async Task<string> RequestCodeReuse(IFormFile file)
         {
             if (file == null)
             {
@@ -63,12 +68,19 @@ namespace eInvoice.Services.Services
             {
                 items = codesList
             };
-            await client.RequestCodeReuse(codes);
+            var response = await client.RequestCodeReuse(codes);
+            return response;
         }
 
         public async Task<SearchCodesResponse> Search(string codeName, int pageSize, int pageNumber)
         {
             var codes = await client.SearchCodes(codeName, pageSize, pageNumber);
+            return codes;
+        }
+
+        public async Task<SearchCodesResponse> SearchPublishedCodes(int? codeLookupValue, string codeName, int pageSize = 10, int pageNumber = 1)
+        {
+            var codes = await client.SearchPublishedCodes(codeLookupValue, codeName, pageSize, pageNumber);
             return codes;
         }
     }

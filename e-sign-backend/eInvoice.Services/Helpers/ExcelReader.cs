@@ -37,10 +37,20 @@ namespace eInvoice.Services.Helpers
                             //check for empty cells in mandatory fields
                             if ((!dataTable.Columns[j].ColumnName.Trim().Replace(" ", string.Empty).Equals("Description", StringComparison.OrdinalIgnoreCase)
                                 && !dataTable.Columns[j].ColumnName.Trim().Replace(" ", string.Empty).Equals("DescriptionAr", StringComparison.OrdinalIgnoreCase)
+                                && !dataTable.Columns[j].ColumnName.Trim().Replace(" ", string.Empty).Equals("ActiveTo", StringComparison.OrdinalIgnoreCase)
+                                && !dataTable.Columns[j].ColumnName.Trim().Replace(" ", string.Empty).Equals("RequestReason", StringComparison.OrdinalIgnoreCase)
                                 && !dataTable.Columns[j].ColumnName.Trim().Replace(" ", string.Empty).Equals("EGSRelatedCode", StringComparison.OrdinalIgnoreCase))
                                 && string.IsNullOrWhiteSpace(dataTable.Rows[i][dataTable.Columns[j]].ToString()))
+                            {
                                 throw new Exception($"Invalid File Data: '{dataTable.Columns[j]}' is empty at row {i + 2}");
-                            row.Add(dataTable.Columns[j].ColumnName.Trim().Replace(" ", string.Empty), dataTable.Rows[i][dataTable.Columns[j]]);
+                            }
+                            // handle Codes being read as decimal instead of int on serialization
+                            var value = dataTable.Rows[i][dataTable.Columns[j]];
+                            if (decimal.TryParse(value.ToString(), out decimal number))
+                            {
+                                value = decimal.ToInt32(number);
+                            }
+                            row.Add(dataTable.Columns[j].ColumnName.Trim().Replace(" ", string.Empty), value);
                         }
                         yield return row;
                     }
