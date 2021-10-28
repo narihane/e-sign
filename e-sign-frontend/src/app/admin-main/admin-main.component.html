@@ -11,24 +11,22 @@
     </div>
     <div class="collapse navbar-collapse" id="example-navbar-primary">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="">
-            <i class="tim-icons icon-single-02"></i> Profile
-          </a>
-        </li>
         <li class="dropdown nav-item">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-            <i class="tim-icons icon-settings-gear-63"></i> Settings
+            <i class="tim-icons icon-single-02"></i> Profile
           </a>
           <div class="dropdown-menu dropdown-with-icons">
-            <a href="https://demos.creative-tim.com/blk-design-system/docs/1.0/getting-started/overview.html"
+            <a routerLink="/codeMap" routerLinkActive="active"
               class="dropdown-item">
               <i class="tim-icons icon-paper"></i> Add Mapping codes
             </a>
-            <a href="examples/register-page.html" class="dropdown-item">
+            <a routerLink="/resigteredUsers" routerLinkActive="active"class="dropdown-item">
               <i class="tim-icons icon-bullet-list-67"></i>Registered Users
             </a>
-            <a [routerLink]="['/']" class="dropdown-item">
+            <a  routerLink="/resigteredUsers" routerLinkActive="active"class="dropdown-item">
+              <i class="tim-icons icon-settings-gear-63"></i> Settings
+            </a>
+            <a href="examples/profile-page.html" class="dropdown-item">
               <i class="tim-icons icon-single-02"></i>Sign out
             </a>
           </div>

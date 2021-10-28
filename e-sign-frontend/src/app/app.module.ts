@@ -11,6 +11,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgxPrintModule} from 'ngx-print';
 import { APP_BASE_HREF } from '@angular/common';
 import {
   MatFormFieldModule
@@ -25,6 +26,11 @@ import { AuthenticationService } from './shared/_services/authentication.service
 import { UserService } from './shared/_services/user.service';
 import { JwtInterceptor } from './shared/_helpers/jwt.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { EditInvoiceComponent } from './shared/edit-invoice/edit-invoice.component';
+import { CodeMappingComponent } from './code-mapping/code-mapping.component';
+import { RegisteredUsersComponent } from './registered-users/registered-users.component';
+import { PrintInvoiceComponent } from './shared/print-invoice/print-invoice.component';
+import { AppService } from './shared/_services/app.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +41,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     UserAddDetailsComponent,
     AdminMainComponent,
     TileComponent,
-    InvoiceDetailsComponent
+    InvoiceDetailsComponent,
+    EditInvoiceComponent,
+    CodeMappingComponent,
+    RegisteredUsersComponent,
+    PrintInvoiceComponent
   ],
   imports: [
     MatFormFieldModule,
@@ -45,13 +55,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     NoopAnimationsModule,
     CommonModule,
     RouterModule,
-    FormsModule,
+    NgxPrintModule,
     ReactiveFormsModule
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
   AuthGuard,
   AuthenticationService,
   UserService,
+  AppService,
   {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

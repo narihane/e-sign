@@ -9,6 +9,8 @@ import { InvoiceStatus } from '../shared/_models/app.model';
 })
 export class InvoiceDetailsComponent implements OnInit {
   status=InvoiceStatus.Approved;
+  tableHead=['#','Invoice Number','Total Amount','Actions'];
+  tableRows=['839283','839201'];
 
   constructor(private route: ActivatedRoute) { }
 

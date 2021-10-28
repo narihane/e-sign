@@ -19,22 +19,20 @@
     </div>
     <div class="collapse navbar-collapse" id="example-navbar-primary">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="">
-            <i class="tim-icons icon-single-02"></i> Profile
-          </a>
-        </li>
         <li class="dropdown nav-item">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-            <i class="tim-icons icon-settings-gear-63"></i> Settings
+            <i class="tim-icons icon-single-02"></i> Profile
           </a>
           <div class="dropdown-menu dropdown-with-icons">
-            <a href="https://demos.creative-tim.com/blk-design-system/docs/1.0/getting-started/overview.html"
+            <a routerLink="/codeMap" routerLinkActive="active"
               class="dropdown-item">
               <i class="tim-icons icon-paper"></i> Add Mapping codes
             </a>
-            <a href="examples/register-page.html" class="dropdown-item">
+            <a routerLink="/resigteredUsers" routerLinkActive="active"class="dropdown-item">
               <i class="tim-icons icon-bullet-list-67"></i>Registered Users
+            </a>
+            <a  routerLink="/resigteredUsers" routerLinkActive="active"class="dropdown-item">
+              <i class="tim-icons icon-settings-gear-63"></i> Settings
             </a>
             <a href="examples/profile-page.html" class="dropdown-item">
               <i class="tim-icons icon-single-02"></i>Sign out
@@ -53,23 +51,16 @@
       <div class="container">
         <table class="table">
           <thead>
-            <tr>
-              <th class="text-center">#</th>
-              <th>Name</th>
-              <th>Job Position</th>
-              <th>Since</th>
-              <th class="text-right">Salary</th>
-              <th class="text-right">Actions</th>
+            <tr >
+              <th *ngFor="let e of tableHead;" class="text-center">{{e}}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="text-center">1</td>
-              <td>John Doe</td>
-              <td>Design</td>
-              <td>2012</td>
-              <td class="text-right">&euro; 89,241</td>
-              <td class="td-actions text-right">
+            <tr *ngFor="let item of tableRows; let i = index">
+              <td class="text-center">{{i}}</td>
+              <td>{{item}}</td>
+              <td>&euro; 89,241</td>
+              <td class="td-actions text-center">
                 <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-round btn-icon">
                   <i class="tim-icons icon-pencil"></i>
                 </button>
