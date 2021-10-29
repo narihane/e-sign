@@ -31,6 +31,9 @@ import { CodeMappingComponent } from './code-mapping/code-mapping.component';
 import { RegisteredUsersComponent } from './registered-users/registered-users.component';
 import { PrintInvoiceComponent } from './shared/print-invoice/print-invoice.component';
 import { AppService } from './shared/_services/app.service';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { UploadFilesService } from './shared/_services/upload-file.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -56,12 +59,15 @@ import { AppService } from './shared/_services/app.service';
     CommonModule,
     RouterModule,
     NgxPrintModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MdbFormsModule,
+    HttpClientModule
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
   AuthGuard,
   AuthenticationService,
   UserService,
+  UploadFilesService,
   AppService,
   {
       provide: HTTP_INTERCEPTORS,
