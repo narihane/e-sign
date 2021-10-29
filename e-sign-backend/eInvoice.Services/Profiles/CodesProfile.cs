@@ -23,7 +23,8 @@ namespace eInvoice.Services.Profiles
                 .ForMember(d => d.description, a => a.MapFrom(s => !string.IsNullOrWhiteSpace(s.Description) ? s.Description : string.Empty))
                 .ForMember(d => d.descriptionAr, a => a.MapFrom(s => !string.IsNullOrWhiteSpace(s.DescriptionAr) ? s.DescriptionAr : string.Empty))
                 .ForMember(d => d.linkedCode, a => a.MapFrom(s => !string.IsNullOrWhiteSpace(s.EGSRelatedCode) ? s.EGSRelatedCode : string.Empty))
-                .ForMember(d => d.requestReason, a => a.MapFrom(s => !string.IsNullOrWhiteSpace(s.RequestReason) ? s.RequestReason : string.Empty));
+                .ForMember(d => d.requestReason, a => a.MapFrom(s => !string.IsNullOrWhiteSpace(s.RequestReason) ? s.RequestReason : string.Empty))
+                .ReverseMap();
         }
     }
 }

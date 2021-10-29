@@ -1,4 +1,5 @@
-﻿using eInvoice.Models.AppSettings;
+﻿using AutoMapper;
+using eInvoice.Models.AppSettings;
 using eInvoice.Models.DTOModel;
 using eInvoice.Models.Enums;
 using eInvoice.Models.Models;
@@ -22,28 +23,36 @@ namespace eInvoice.Services.Services
         private readonly IdentityServiceHttpClient httpClient;
         private readonly IGenericRepository<User> genericRepo;
         private readonly Jwt jwtSettings;
+        private readonly IMapper mapper;
 
-        public UserService(IUserRepository userRepo, IGenericRepository<User> genericRepo, IOptions<Jwt> jwtSettings, IdentityServiceHttpClient httpClient)
+        public UserService(IUserRepository userRepo, IGenericRepository<User> genericRepo, IOptions<Jwt> jwtSettings, IdentityServiceHttpClient httpClient, IMapper mapper)
         {
             this.userRepo = userRepo;
             this.jwtSettings = jwtSettings.Value;
             this.genericRepo = genericRepo;
             this.httpClient = httpClient;
+            this.mapper = mapper;
         }
 
         public async Task<string> LogIn(AuthRequestModel model)
         {
-            var user = userRepo.GetUser(model.UserName, model.Password);
+            var user = userRepo.GetByUsername(model.UserName);
+            if (user == null)
+                throw new UnauthorizedAccessException($"Incorrect username: {model.UserName}");
 
-            // return null if user not found
-            if (user == null) return null;
+            // verify password
+            bool verified = BCrypt.Net.BCrypt.Verify(model.Password, user.Password);
+            if (!verified)
+                throw new UnauthorizedAccessException("Incorrect Password!");
 
-            // authentication successful so generate jwt token
             if (user.Role == UserRole.User.ToString())
             {
+                // authentication successful so generate User jwt token
                 var token = generateJwtToken(user);
                 return token;
             }
+
+            // Get Admin Tax Payer Token
             var taxPayerToken = await httpClient.GetToken();
             return taxPayerToken;
         }
@@ -58,24 +67,9 @@ namespace eInvoice.Services.Services
                 throw new Exception("User already registered");
             }
 
-            var userObject = new User
-            {
-                Username = model.UserName,
-                Password = model.Password,
-                Role = model.UserRole.ToString(),
-                Usersdetail = new Usersdetail
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    FullName = $"{model.FirstName.Trim()} {model.LastName.Trim()}",
-                    Email = model.Email,
-                    FullAddress = $"{model.Country}, {model.City},{model.Street}",
-                    Phone = model.Phone,
-                    City = model.City,
-                    Country = model.Country,
-                    Street = model.Street
-                }
-            };
+            model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+
+            var userObject = mapper.Map<UserRegisterationModel, User>(model);
 
             genericRepo.Insert(userObject);
         }

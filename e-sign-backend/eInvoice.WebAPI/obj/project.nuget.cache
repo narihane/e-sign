@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "EWVYz0Iu7PLhwenzk4wu2HaInaanPfSd6t2V7bcevdCeuLTe3d4zCmLKfx6jaW5skxVttLiaZTI7BDMrcZqTGg==",
+  "dgSpecHash": "bc6JG4tXL0axYV0xcPsI/cGwc8p414RIwk03mcCKNHQ8D0P6cvx2FhKkErKrFQa22e9INOIHMTSe7yQOJcZgBA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\source\\repos\\e-sign\\e-sign-backend\\eInvoice.WebAPI\\eInvoice.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\exceldatareader\\3.6.0\\exceldatareader.3.6.0.nupkg.sha512",

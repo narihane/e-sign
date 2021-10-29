@@ -80,21 +80,5 @@ namespace eInvoice.WebAPI.Controllers
             }
 
         }
-
-
-        //[HttpGet("TaxPayer/Login")]
-        //public async Task<IActionResult> GetToken(AuthRequestModel model)
-        //{
-        //    try
-        //    {
-        //        var user = userService.LogIn(model);
-        //        var response = await taxAuthorityService.GetToken();
-        //        return Ok(response);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
     }
 }
