@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UploadFilesService } from '../shared/_services/upload-file.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-code-mapping',
   templateUrl: './code-mapping.component.html',
@@ -12,7 +13,14 @@ export class CodeMappingComponent {
   currentFile?: File;
   progress = 0;
   message = '';
-
+  codeForm = new FormGroup({
+    date: new FormControl('', [
+      Validators.required
+    ]),
+    branch: new FormControl('', [
+      Validators.required
+    ])
+  });
   fileInfos?: Observable<any>;
 
   constructor(private uploadService: UploadFilesService) { }
