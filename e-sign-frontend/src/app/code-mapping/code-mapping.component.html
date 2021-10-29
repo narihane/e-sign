@@ -47,58 +47,57 @@
     <div class="page-header-image"></div>
     <div class="content">
       <div class="container">
-        <!-- <form>
-          <div class="file-field md-form">
-            <div mdbBtn floating="true" size="md" gradient="purple" mdbWavesEffect>
-              <i class="fas fa-cloud-upload-alt"></i>
-              <input type="file" mdbFileSelect (uploadOutput)="onUploadOutput($event)">
+        <ul class="nav nav-pills nav-pills-primary nav-pills-icons">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#file" role="tablist" aria-expanded="true">
+              File Upload
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#manual" role="tablist" aria-expanded="false">
+              Manual
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content tab-space">
+          <div class="tab-pane active" id="file" aria-expanded="true">
+            <div class="row">
+              <div class="col-8">
+                <label class="btn btn-default p-0">
+                  <input type="file" (change)="selectFile($event)" multiple>
+                </label>
+              </div>
+
+              <div class="col-4">
+                <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+                  Upload
+                </button>
+              </div>
             </div>
-            <div class="file-path-wrapper mt-3">
-              <input class="file-path" type="text" placeholder="Upload your file" [value]="showFiles()">
+
+            <div *ngIf="currentFile" class="progress my-3">
+              <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
+                [ngStyle]="{ width: progress + '%' }">
+                {{ progress }}%
+              </div>
+            </div>
+
+            <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+
+            <div class="card mt-3">
+              <div class="card-header">List of Files</div>
+              <ul class="list-group list-group-flush" *ngFor="let file of fileInfos | async">
+                <li class="list-group-item">
+                  <a href="{{ file.url }}">{{ file.name }}</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <button mdbBtn type="button" gradient="purple" class="waves-light" (click)="startUpload()"
-            mdbWavesEffect>Start uploading</button>
-        </form> -->
-        <!-- <form class="md-form"> -->
-        <!-- <div class="file-field big"> -->
-        <!-- <button class="btn btn-primary btn-round" type="button">
-              <i class="tim-icons icon-heart-2"></i>
-              <input type="file" multiple>
-            </button> -->
-        <!-- </div> -->
-        <!-- </form> -->
-        <div class="row">
-          <div class="col-8">
-            <label class="btn btn-default p-0">
-              <input type="file" (change)="selectFile($event)" multiple>
-            </label>
+          <div class="tab-pane active" id="manual" aria-expanded="true">
+
           </div>
-
-          <div class="col-4">
-            <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-              Upload
-            </button>
-          </div>
-        </div>
-
-        <div *ngIf="currentFile" class="progress my-3">
-          <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-            attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
-            [ngStyle]="{ width: progress + '%' }">
-            {{ progress }}%
-          </div>
-        </div>
-
-        <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
-
-        <div class="card mt-3">
-          <div class="card-header">List of Files</div>
-          <ul class="list-group list-group-flush" *ngFor="let file of fileInfos | async">
-            <li class="list-group-item">
-              <a href="{{ file.url }}">{{ file.name }}</a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
