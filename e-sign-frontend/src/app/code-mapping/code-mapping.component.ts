@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UploadFilesService } from '../shared/_services/upload-file.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-code-mapping',
   templateUrl: './code-mapping.component.html',
@@ -13,20 +13,49 @@ export class CodeMappingComponent {
   currentFile?: File;
   progress = 0;
   message = '';
-  codeForm = new FormGroup({
-    date: new FormControl('', [
+  oneCodeForm = new FormGroup({
+    internal_code: new FormControl('', [
       Validators.required
     ]),
-    branch: new FormControl('', [
+    portal_code: new FormControl('', [
       Validators.required
     ])
   });
   fileInfos?: Observable<any>;
+  codesForm: FormGroup;
 
-  constructor(private uploadService: UploadFilesService) { }
+  constructor(private fb: FormBuilder,
+    private uploadService: UploadFilesService) {
+    this.codesForm = this.fb.group({
+      codes: this.fb.array([this.oneCodeForm])
+    })
+   }
 
   ngOnInit(): void {
     this.fileInfos = this.uploadService.getFiles();
+  }
+
+  codes(): FormArray {
+    return this.codesForm.get("codes") as FormArray
+  }
+
+  newCode(): FormGroup {
+    return new FormGroup({
+      internal_code: new FormControl('', [
+        Validators.required
+      ]),
+      portal_code: new FormControl('', [
+        Validators.required
+      ])
+    });
+  }
+
+  addItem() {
+    this.codes().push(this.newCode());
+  }
+
+  deleteItem(i: number) {
+    this.codes().removeAt(i);
   }
 
   selectFile(event: any): void {
@@ -68,5 +97,9 @@ export class CodeMappingComponent {
 
       this.selectedFiles = undefined;
     }
+  }
+
+  manualCodesSubmit(){
+    console.log(this.codesForm.value)
   }
 }
