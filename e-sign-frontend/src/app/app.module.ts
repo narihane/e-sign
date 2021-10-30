@@ -34,6 +34,8 @@ import { AppService } from './shared/_services/app.service';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { UploadFilesService } from './shared/_services/upload-file.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { HttpClientModule } from '@angular/common/http';
     NgxPrintModule,
     ReactiveFormsModule,
     MdbFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
   AuthGuard,

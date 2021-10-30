@@ -11,8 +11,8 @@ export class UserService {
     return this.http.get<User[]>('/api/users');
   }
 
-  getById(id: number) {
-    return this.http.get('/api/users/' + id);
+  getByEmail(email: string) {
+    return this.http.get('/api/users/' + email);
   }
 
   create(user: User) {
@@ -20,7 +20,7 @@ export class UserService {
   }
 
   update(user: User) {
-    return this.http.put('/api/users/' + user.id, user);
+    return this.http.put('/api/users/' + user.email, user);
   }
 
   delete(id: number) {
