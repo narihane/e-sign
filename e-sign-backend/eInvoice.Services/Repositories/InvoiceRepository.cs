@@ -16,7 +16,7 @@ namespace eInvoice.Services.Repositories
             this.dbcontext = dbcontext;
         }
 
-        public Invoice Getinvoice(string internalId)
+        public Invoice GetInvoice(string internalId)
         {
             return dbcontext.Set<Invoice>().SingleOrDefault(x=>x.InteranlId == internalId);
         }

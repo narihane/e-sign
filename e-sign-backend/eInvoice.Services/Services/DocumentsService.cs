@@ -32,7 +32,7 @@ namespace eInvoice.Services.Services
             var documents = new List<Document>();
             foreach (var id in internalIds)
             {
-                var invoice = invoiceRepo.Getinvoice(id);
+                var invoice = invoiceRepo.GetInvoice(id);
                 if (invoice != null)
                 {
                     ////var document = mapper.Map<Document>(invoice);

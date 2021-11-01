@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bc6JG4tXL0axYV0xcPsI/cGwc8p414RIwk03mcCKNHQ8D0P6cvx2FhKkErKrFQa22e9INOIHMTSe7yQOJcZgBA==",
+  "dgSpecHash": "ULCIaVdxJiH1s5W3HtJZ/gTQP5uH6cHje7YYKjYUfyxmc417lWH37ct/kcj9rJvZcGWV3Np2sHiLqI8aJ4DAVg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\source\\repos\\e-sign\\e-sign-backend\\eInvoice.WebAPI\\eInvoice.WebAPI.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,9 @@
     "C:\\Users\\Admin\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\exceldatareader\\3.6.0\\exceldatareader.3.6.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\exceldatareader.dataset\\3.6.0\\exceldatareader.dataset.3.6.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\fluentvalidation\\10.3.4\\fluentvalidation.10.3.4.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.3.4\\fluentvalidation.aspnetcore.10.3.4.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.3.4\\fluentvalidation.dependencyinjectionextensions.10.3.4.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

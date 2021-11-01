@@ -5,6 +5,7 @@ using eInvoice.Services.Profiles;
 using eInvoice.Services.Repositories;
 using eInvoice.Services.Services;
 using eInvoice.WebAPI.Middlewares;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,13 @@ namespace eInvoice.WebAPI
             services.Configure<Jwt>(Configuration.GetSection("Jwt"));
             services.Configure<Apis>(Configuration.GetSection("Apis"));
 
-            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddControllers()
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+                .AddFluentValidation(s =>
+                {
+                    s.RegisterValidatorsFromAssemblyContaining<Startup>();
+                }); ;
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -43,6 +50,7 @@ namespace eInvoice.WebAPI
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eInvoice.WebAPI", Version = "v1" });

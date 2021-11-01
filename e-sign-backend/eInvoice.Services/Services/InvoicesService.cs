@@ -24,7 +24,6 @@ namespace eInvoice.Services.Services
         public IEnumerable<Invoice> GetAllInvoices()
         {
             var invoices = genericRepo.GetAll();
-
             return invoices;
         }
 
@@ -35,7 +34,7 @@ namespace eInvoice.Services.Services
                 throw new Exception("Invoice id missing!");
             }
 
-            var invoice = invoiceRepo.Getinvoice(id);
+            var invoice = invoiceRepo.GetInvoice(id);
 
             if (invoice == null)
             {

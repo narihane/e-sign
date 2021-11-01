@@ -9,6 +9,6 @@ namespace eInvoice.Services.Repositories
 {
     public interface IInvoiceRepository
     {
-        Invoice Getinvoice(string internalId);
+        Invoice GetInvoice(string internalId);
     }
 }
