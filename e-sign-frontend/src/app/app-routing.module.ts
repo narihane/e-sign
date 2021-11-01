@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminMainComponent } from './admin-main/admin-main.component';
+import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { CodeMappingComponent } from './code-mapping/code-mapping.component';
 import { HomeComponent } from './home/home.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   },
   {path:'codeMap', component:CodeMappingComponent},
   {path:'registeredUsers', component:RegisteredUsersComponent},
+  {path:'adminSettings', component:AdminSettingsComponent},
   { path: '**', redirectTo: '' }
 ];
 

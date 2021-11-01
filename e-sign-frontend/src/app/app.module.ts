@@ -36,6 +36,7 @@ import { UploadFilesService } from './shared/_services/upload-file.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ToastrModule } from 'ngx-toastr';
     EditInvoiceComponent,
     CodeMappingComponent,
     RegisteredUsersComponent,
-    PrintInvoiceComponent
+    PrintInvoiceComponent,
+    AdminSettingsComponent
   ],
   imports: [
     MatFormFieldModule,

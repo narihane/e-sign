@@ -27,8 +27,8 @@ export class RegisteredUsersComponent implements OnInit {
   }
 
   approveUser(){
-    //TODO: APPROVE USER API CALL + ERROR HANDLING
-    //On success display modal approved + update table with new get call of registered users
+    //TODO: APPROVE USER API CALL + ERROR HANDLING + update table with new get call of registered users
+    //On success display modal approved
     this.notifyService.showSuccess("","User approved");
   }
 
