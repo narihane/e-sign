@@ -633,8 +633,7 @@ namespace eInvoice.Models.Models
 
                 entity.Property(e => e.Role)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
+                    .HasColumnType("int")
                     .HasColumnName("role");
 
                 entity.Property(e => e.Username)
@@ -642,6 +641,11 @@ namespace eInvoice.Models.Models
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("username");
+
+                entity.Property(e => e.Status)
+                    .IsRequired(false)
+                    .HasColumnType("int")
+                    .HasColumnName("status");
             });
 
             modelBuilder.Entity<Usersdetail>(entity =>

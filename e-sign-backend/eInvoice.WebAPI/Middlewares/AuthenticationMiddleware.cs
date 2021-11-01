@@ -70,7 +70,7 @@ namespace eInvoice.WebAPI.Middlewares
                     context.Items["User"] = new User
                     {
                         Username = clientId,
-                        Role = UserRole.Admin.ToString()
+                        Role = UserRole.Admin
                     };
                 }
             }

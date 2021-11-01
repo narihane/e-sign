@@ -45,7 +45,7 @@ namespace eInvoice.Services.Services
             if (!verified)
                 throw new UnauthorizedAccessException("Incorrect Password!");
 
-            if (user.Role == UserRole.User.ToString())
+            if (user.Role == UserRole.User)
             {
                 // authentication successful so generate User jwt token
                 var token = generateJwtToken(user);
@@ -63,13 +63,17 @@ namespace eInvoice.Services.Services
 
             // return null if user not found
             if (user != null)
-            {
                 throw new Exception("User already registered");
-            }
 
             model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
             var userObject = mapper.Map<UserRegisterationModel, User>(model);
+
+            if (userObject.Role == UserRole.Admin)
+                userObject.Status = AccountStatus.Approved;
+            else
+                //Rejected until Admin approves
+                userObject.Status = AccountStatus.Rejected;
 
             genericRepo.Insert(userObject);
         }
@@ -102,6 +106,44 @@ namespace eInvoice.Services.Services
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public string Approve(int id)
+        {
+            var user = genericRepo.GetById(id);
+
+            if (user == null)
+                throw new Exception($"User with id:{id} does not exist!");
+
+            user.Status = AccountStatus.Approved;
+            genericRepo.Update(user);
+
+            return AccountStatus.Approved.ToString();
+        }
+
+        public string Reject(int id)
+        {
+            var user = genericRepo.GetById(id);
+
+            if (user == null)
+                throw new Exception($"User with id:{id} does not exist!");
+
+            user.Status = AccountStatus.Rejected;
+            genericRepo.Update(user);
+
+            return AccountStatus.Rejected.ToString();
+        }
+
+        public string Delete(int id)
+        {
+            var user = genericRepo.GetById(id);
+
+            if (user == null)
+                throw new Exception($"User with id:{id} does not exist!");
+
+            genericRepo.Delete(user);
+
+            return "User Account Deleted Succesfully!";
         }
     }
 }

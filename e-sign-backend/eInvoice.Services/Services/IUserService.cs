@@ -16,8 +16,14 @@ namespace eInvoice.Services.Services
 
         IEnumerable<User> GetAll();
 
+        string Approve(int id);
+        
+        string Reject(int id);
+
         User GetById(int id);
 
         User GetByUsername(string username);
+
+        string Delete(int id);
     }
 }
